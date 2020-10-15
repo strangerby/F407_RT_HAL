@@ -17,7 +17,8 @@
                 "Applications/include",
                 "RT-Thread/include",
                 "RT-Thread/bsp",
-                "derivers/uart1"
+                "derivers/uart1",
+                "derivers/bsp_led"
             ],
             "defines": [
                 "_DEBUG",

@@ -47,7 +47,8 @@ $(wildcard RT-Thread/components/finsh/*.c)\
 $(wildcard RT-Thread/bsp/*.c)\
 $(wildcard RT-Thread/src/*.c)\
 $(wildcard RT-Thread/libcpu/arm/cortex-m4/*.c)\
-$(wildcard derivers/uart1/*c)
+$(wildcard derivers/uart1/*c)\
+$(wildcard derivers/bsp_led/*.c)
 
 
 # ASM sources
@@ -125,7 +126,8 @@ C_INCLUDES =  \
 -IRT-Thread/components/finsh \
 -ILibraries/CMSIS/DSP/Include \
 -Iderivers/uart1\
--IRT-Thread/bsp
+-IRT-Thread/bsp\
+-Iderivers/bsp_led\
 
 
 # compile gcc flags
