@@ -1,0 +1,1074 @@
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"cpuport.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.rt_hw_stack_init,"ax",%progbits
+  16              		.align	1
+  17              		.global	rt_hw_stack_init
+  18              		.arch armv7e-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	rt_hw_stack_init:
+  25              	.LVL0:
+  26              	.LFB15:
+  27              		.file 1 "RT-Thread/libcpu/arm/cortex-m4/cpuport.c"
+   1:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** /*
+   2:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  * Copyright (c) 2006-2018, RT-Thread Development Team
+   3:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  *
+   4:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  * SPDX-License-Identifier: Apache-2.0
+   5:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  *
+   6:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  * Change Logs:
+   7:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  * Date           Author       Notes
+   8:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  * 2011-10-21     Bernard      the first version.
+   9:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  * 2011-10-27     aozima       update for cortex-M4 FPU.
+  10:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  * 2011-12-31     aozima       fixed stack align issues.
+  11:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  * 2012-01-01     aozima       support context switch load/store FPU register.
+  12:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  * 2012-12-11     lgnq         fixed the coding style.
+  13:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  * 2012-12-23     aozima       stack addr align to 8byte.
+  14:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  * 2012-12-29     Bernard      Add exception hook.
+  15:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  * 2013-06-23     aozima       support lazy stack optimized.
+  16:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  * 2018-07-24     aozima       enhancement hard fault exception handler.
+  17:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  */
+  18:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+  19:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #include <rtthread.h>
+  20:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+  21:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #if               /* ARMCC */ (  (defined ( __CC_ARM ) && defined ( __TARGET_FPU_VFP ))    \
+  22:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****                   /* Clang */ || (defined ( __CLANG_ARM ) && defined ( __VFP_FP__ ) && !defined(__S
+  23:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****                   /* IAR */   || (defined ( __ICCARM__ ) && defined ( __ARMVFP__ ))        \
+  24:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****                   /* GNU */   || (defined ( __GNUC__ ) && defined ( __VFP_FP__ ) && !defined(__SOFT
+  25:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #define USE_FPU   1
+  26:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #else
+  27:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #define USE_FPU   0
+  28:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #endif
+  29:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+  30:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** /* exception and interrupt handler table */
+  31:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** rt_uint32_t rt_interrupt_from_thread;
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 2
+
+
+  32:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** rt_uint32_t rt_interrupt_to_thread;
+  33:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** rt_uint32_t rt_thread_switch_interrupt_flag;
+  34:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** /* exception hook */
+  35:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** static rt_err_t (*rt_exception_hook)(void *context) = RT_NULL;
+  36:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+  37:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** struct exception_stack_frame
+  38:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** {
+  39:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r0;
+  40:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r1;
+  41:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r2;
+  42:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r3;
+  43:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r12;
+  44:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t lr;
+  45:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t pc;
+  46:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t psr;
+  47:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** };
+  48:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+  49:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** struct stack_frame
+  50:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** {
+  51:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #if USE_FPU
+  52:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t flag;
+  53:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #endif /* USE_FPU */
+  54:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+  55:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     /* r4 ~ r11 register */
+  56:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r4;
+  57:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r5;
+  58:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r6;
+  59:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r7;
+  60:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r8;
+  61:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r9;
+  62:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r10;
+  63:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r11;
+  64:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+  65:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     struct exception_stack_frame exception_stack_frame;
+  66:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** };
+  67:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+  68:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** struct exception_stack_frame_fpu
+  69:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** {
+  70:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r0;
+  71:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r1;
+  72:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r2;
+  73:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r3;
+  74:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r12;
+  75:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t lr;
+  76:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t pc;
+  77:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t psr;
+  78:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+  79:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #if USE_FPU
+  80:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     /* FPU register */
+  81:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t S0;
+  82:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t S1;
+  83:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t S2;
+  84:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t S3;
+  85:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t S4;
+  86:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t S5;
+  87:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t S6;
+  88:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t S7;
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 3
+
+
+  89:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t S8;
+  90:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t S9;
+  91:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t S10;
+  92:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t S11;
+  93:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t S12;
+  94:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t S13;
+  95:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t S14;
+  96:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t S15;
+  97:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t FPSCR;
+  98:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t NO_NAME;
+  99:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #endif
+ 100:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** };
+ 101:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 102:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** struct stack_frame_fpu
+ 103:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** {
+ 104:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t flag;
+ 105:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 106:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     /* r4 ~ r11 register */
+ 107:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r4;
+ 108:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r5;
+ 109:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r6;
+ 110:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r7;
+ 111:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r8;
+ 112:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r9;
+ 113:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r10;
+ 114:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t r11;
+ 115:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 116:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #if USE_FPU
+ 117:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     /* FPU register s16 ~ s31 */
+ 118:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t s16;
+ 119:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t s17;
+ 120:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t s18;
+ 121:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t s19;
+ 122:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t s20;
+ 123:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t s21;
+ 124:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t s22;
+ 125:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t s23;
+ 126:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t s24;
+ 127:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t s25;
+ 128:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t s26;
+ 129:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t s27;
+ 130:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t s28;
+ 131:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t s29;
+ 132:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t s30;
+ 133:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t s31;
+ 134:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #endif
+ 135:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 136:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     struct exception_stack_frame_fpu exception_stack_frame;
+ 137:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** };
+ 138:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 139:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** rt_uint8_t *rt_hw_stack_init(void       *tentry,
+ 140:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****                              void       *parameter,
+ 141:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****                              rt_uint8_t *stack_addr,
+ 142:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****                              void       *texit)
+ 143:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** {
+  28              		.loc 1 143 1 view -0
+  29              		.cfi_startproc
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 4
+
+
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              		.loc 1 143 1 is_stmt 0 view .LVU1
+  34 0000 70B4     		push	{r4, r5, r6}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 12
+  37              		.cfi_offset 4, -12
+  38              		.cfi_offset 5, -8
+  39              		.cfi_offset 6, -4
+  40 0002 0646     		mov	r6, r0
+ 144:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     struct stack_frame *stack_frame;
+  41              		.loc 1 144 5 is_stmt 1 view .LVU2
+ 145:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint8_t         *stk;
+  42              		.loc 1 145 5 view .LVU3
+ 146:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     unsigned long       i;
+  43              		.loc 1 146 5 view .LVU4
+ 147:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 148:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     stk  = stack_addr + sizeof(rt_uint32_t);
+  44              		.loc 1 148 5 view .LVU5
+  45              		.loc 1 148 10 is_stmt 0 view .LVU6
+  46 0004 0432     		adds	r2, r2, #4
+  47              	.LVL1:
+ 149:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     stk  = (rt_uint8_t *)RT_ALIGN_DOWN((rt_uint32_t)stk, 8);
+  48              		.loc 1 149 5 is_stmt 1 view .LVU7
+  49              		.loc 1 149 26 is_stmt 0 view .LVU8
+  50 0006 22F00705 		bic	r5, r2, #7
+  51              	.LVL2:
+ 150:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     stk -= sizeof(struct stack_frame);
+  52              		.loc 1 150 5 is_stmt 1 view .LVU9
+  53              		.loc 1 150 9 is_stmt 0 view .LVU10
+  54 000a A5F14000 		sub	r0, r5, #64
+  55              	.LVL3:
+ 151:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 152:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     stack_frame = (struct stack_frame *)stk;
+  56              		.loc 1 152 5 is_stmt 1 view .LVU11
+ 153:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 154:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     /* init all register */
+ 155:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     for (i = 0; i < sizeof(struct stack_frame) / sizeof(rt_uint32_t); i ++)
+  57              		.loc 1 155 5 view .LVU12
+  58              		.loc 1 155 12 is_stmt 0 view .LVU13
+  59 000e 0022     		movs	r2, #0
+  60              	.LVL4:
+  61              	.L2:
+  62              		.loc 1 155 17 is_stmt 1 discriminator 1 view .LVU14
+  63              		.loc 1 155 5 is_stmt 0 discriminator 1 view .LVU15
+  64 0010 0F2A     		cmp	r2, #15
+  65 0012 04D8     		bhi	.L5
+ 156:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 157:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         ((rt_uint32_t *)stack_frame)[i] = 0xdeadbeef;
+  66              		.loc 1 157 9 is_stmt 1 discriminator 3 view .LVU16
+  67              		.loc 1 157 41 is_stmt 0 discriminator 3 view .LVU17
+  68 0014 0C4C     		ldr	r4, .L6
+  69 0016 40F82240 		str	r4, [r0, r2, lsl #2]
+ 155:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+  70              		.loc 1 155 71 is_stmt 1 discriminator 3 view .LVU18
+ 155:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 5
+
+
+  71              		.loc 1 155 73 is_stmt 0 discriminator 3 view .LVU19
+  72 001a 0132     		adds	r2, r2, #1
+  73              	.LVL5:
+ 155:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+  74              		.loc 1 155 73 discriminator 3 view .LVU20
+  75 001c F8E7     		b	.L2
+  76              	.L5:
+ 158:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 159:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 160:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     stack_frame->exception_stack_frame.r0  = (unsigned long)parameter; /* r0 : argument */
+  77              		.loc 1 160 5 is_stmt 1 view .LVU21
+  78              		.loc 1 160 44 is_stmt 0 view .LVU22
+  79 001e 45F8201C 		str	r1, [r5, #-32]
+ 161:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     stack_frame->exception_stack_frame.r1  = 0;                        /* r1 */
+  80              		.loc 1 161 5 is_stmt 1 view .LVU23
+  81              		.loc 1 161 44 is_stmt 0 view .LVU24
+  82 0022 0022     		movs	r2, #0
+  83              	.LVL6:
+  84              		.loc 1 161 44 view .LVU25
+  85 0024 45F81C2C 		str	r2, [r5, #-28]
+ 162:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     stack_frame->exception_stack_frame.r2  = 0;                        /* r2 */
+  86              		.loc 1 162 5 is_stmt 1 view .LVU26
+  87              		.loc 1 162 44 is_stmt 0 view .LVU27
+  88 0028 45F8182C 		str	r2, [r5, #-24]
+ 163:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     stack_frame->exception_stack_frame.r3  = 0;                        /* r3 */
+  89              		.loc 1 163 5 is_stmt 1 view .LVU28
+  90              		.loc 1 163 44 is_stmt 0 view .LVU29
+  91 002c 45F8142C 		str	r2, [r5, #-20]
+ 164:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     stack_frame->exception_stack_frame.r12 = 0;                        /* r12 */
+  92              		.loc 1 164 5 is_stmt 1 view .LVU30
+  93              		.loc 1 164 44 is_stmt 0 view .LVU31
+  94 0030 45F8102C 		str	r2, [r5, #-16]
+ 165:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     stack_frame->exception_stack_frame.lr  = (unsigned long)texit;     /* lr */
+  95              		.loc 1 165 5 is_stmt 1 view .LVU32
+  96              		.loc 1 165 44 is_stmt 0 view .LVU33
+  97 0034 45F80C3C 		str	r3, [r5, #-12]
+ 166:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     stack_frame->exception_stack_frame.pc  = (unsigned long)tentry;    /* entry point, pc */
+  98              		.loc 1 166 5 is_stmt 1 view .LVU34
+  99              		.loc 1 166 44 is_stmt 0 view .LVU35
+ 100 0038 45F8086C 		str	r6, [r5, #-8]
+ 167:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     stack_frame->exception_stack_frame.psr = 0x01000000L;              /* PSR */
+ 101              		.loc 1 167 5 is_stmt 1 view .LVU36
+ 102              		.loc 1 167 44 is_stmt 0 view .LVU37
+ 103 003c 4FF08073 		mov	r3, #16777216
+ 104              	.LVL7:
+ 105              		.loc 1 167 44 view .LVU38
+ 106 0040 45F8043C 		str	r3, [r5, #-4]
+ 168:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 169:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #if USE_FPU
+ 170:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     stack_frame->flag = 0;
+ 171:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #endif /* USE_FPU */
+ 172:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 173:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     /* return task's current stack address */
+ 174:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     return stk;
+ 107              		.loc 1 174 5 is_stmt 1 view .LVU39
+ 175:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** }
+ 108              		.loc 1 175 1 is_stmt 0 view .LVU40
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 6
+
+
+ 109 0044 70BC     		pop	{r4, r5, r6}
+ 110              	.LCFI1:
+ 111              		.cfi_restore 6
+ 112              		.cfi_restore 5
+ 113              		.cfi_restore 4
+ 114              		.cfi_def_cfa_offset 0
+ 115              	.LVL8:
+ 116              		.loc 1 175 1 view .LVU41
+ 117 0046 7047     		bx	lr
+ 118              	.L7:
+ 119              		.align	2
+ 120              	.L6:
+ 121 0048 EFBEADDE 		.word	-559038737
+ 122              		.cfi_endproc
+ 123              	.LFE15:
+ 125              		.section	.text.rt_hw_exception_install,"ax",%progbits
+ 126              		.align	1
+ 127              		.global	rt_hw_exception_install
+ 128              		.syntax unified
+ 129              		.thumb
+ 130              		.thumb_func
+ 131              		.fpu softvfp
+ 133              	rt_hw_exception_install:
+ 134              	.LVL9:
+ 135              	.LFB16:
+ 176:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 177:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** /**
+ 178:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  * This function set the hook, which is invoked on fault exception handling.
+ 179:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  *
+ 180:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  * @param exception_handle the exception handling hook function.
+ 181:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  */
+ 182:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** void rt_hw_exception_install(rt_err_t (*exception_handle)(void *context))
+ 183:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** {
+ 136              		.loc 1 183 1 is_stmt 1 view -0
+ 137              		.cfi_startproc
+ 138              		@ args = 0, pretend = 0, frame = 0
+ 139              		@ frame_needed = 0, uses_anonymous_args = 0
+ 140              		@ link register save eliminated.
+ 184:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_exception_hook = exception_handle;
+ 141              		.loc 1 184 5 view .LVU43
+ 142              		.loc 1 184 23 is_stmt 0 view .LVU44
+ 143 0000 014B     		ldr	r3, .L9
+ 144 0002 1860     		str	r0, [r3]
+ 185:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** }
+ 145              		.loc 1 185 1 view .LVU45
+ 146 0004 7047     		bx	lr
+ 147              	.L10:
+ 148 0006 00BF     		.align	2
+ 149              	.L9:
+ 150 0008 00000000 		.word	.LANCHOR0
+ 151              		.cfi_endproc
+ 152              	.LFE16:
+ 154              		.section	.rodata.rt_hw_hard_fault_exception.str1.4,"aMS",%progbits,1
+ 155              		.align	2
+ 156              	.LC0:
+ 157 0000 7073723A 		.ascii	"psr: 0x%08x\012\000"
+ 157      20307825 
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 7
+
+
+ 157      3038780A 
+ 157      00
+ 158 000d 000000   		.align	2
+ 159              	.LC1:
+ 160 0010 7230303A 		.ascii	"r00: 0x%08x\012\000"
+ 160      20307825 
+ 160      3038780A 
+ 160      00
+ 161 001d 000000   		.align	2
+ 162              	.LC2:
+ 163 0020 7230313A 		.ascii	"r01: 0x%08x\012\000"
+ 163      20307825 
+ 163      3038780A 
+ 163      00
+ 164 002d 000000   		.align	2
+ 165              	.LC3:
+ 166 0030 7230323A 		.ascii	"r02: 0x%08x\012\000"
+ 166      20307825 
+ 166      3038780A 
+ 166      00
+ 167 003d 000000   		.align	2
+ 168              	.LC4:
+ 169 0040 7230333A 		.ascii	"r03: 0x%08x\012\000"
+ 169      20307825 
+ 169      3038780A 
+ 169      00
+ 170 004d 000000   		.align	2
+ 171              	.LC5:
+ 172 0050 7230343A 		.ascii	"r04: 0x%08x\012\000"
+ 172      20307825 
+ 172      3038780A 
+ 172      00
+ 173 005d 000000   		.align	2
+ 174              	.LC6:
+ 175 0060 7230353A 		.ascii	"r05: 0x%08x\012\000"
+ 175      20307825 
+ 175      3038780A 
+ 175      00
+ 176 006d 000000   		.align	2
+ 177              	.LC7:
+ 178 0070 7230363A 		.ascii	"r06: 0x%08x\012\000"
+ 178      20307825 
+ 178      3038780A 
+ 178      00
+ 179 007d 000000   		.align	2
+ 180              	.LC8:
+ 181 0080 7230373A 		.ascii	"r07: 0x%08x\012\000"
+ 181      20307825 
+ 181      3038780A 
+ 181      00
+ 182 008d 000000   		.align	2
+ 183              	.LC9:
+ 184 0090 7230383A 		.ascii	"r08: 0x%08x\012\000"
+ 184      20307825 
+ 184      3038780A 
+ 184      00
+ 185 009d 000000   		.align	2
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 8
+
+
+ 186              	.LC10:
+ 187 00a0 7230393A 		.ascii	"r09: 0x%08x\012\000"
+ 187      20307825 
+ 187      3038780A 
+ 187      00
+ 188 00ad 000000   		.align	2
+ 189              	.LC11:
+ 190 00b0 7231303A 		.ascii	"r10: 0x%08x\012\000"
+ 190      20307825 
+ 190      3038780A 
+ 190      00
+ 191 00bd 000000   		.align	2
+ 192              	.LC12:
+ 193 00c0 7231313A 		.ascii	"r11: 0x%08x\012\000"
+ 193      20307825 
+ 193      3038780A 
+ 193      00
+ 194 00cd 000000   		.align	2
+ 195              	.LC13:
+ 196 00d0 7231323A 		.ascii	"r12: 0x%08x\012\000"
+ 196      20307825 
+ 196      3038780A 
+ 196      00
+ 197 00dd 000000   		.align	2
+ 198              	.LC14:
+ 199 00e0 206C723A 		.ascii	" lr: 0x%08x\012\000"
+ 199      20307825 
+ 199      3038780A 
+ 199      00
+ 200 00ed 000000   		.align	2
+ 201              	.LC15:
+ 202 00f0 2070633A 		.ascii	" pc: 0x%08x\012\000"
+ 202      20307825 
+ 202      3038780A 
+ 202      00
+ 203 00fd 000000   		.align	2
+ 204              	.LC16:
+ 205 0100 68617264 		.ascii	"hard fault on thread: %s\015\012\015\012\000"
+ 205      20666175 
+ 205      6C74206F 
+ 205      6E207468 
+ 205      72656164 
+ 206 011d 000000   		.align	2
+ 207              	.LC17:
+ 208 0120 68617264 		.ascii	"hard fault on handler\015\012\015\012\000"
+ 208      20666175 
+ 208      6C74206F 
+ 208      6E206861 
+ 208      6E646C65 
+ 209 013a 0000     		.align	2
+ 210              	.LC18:
+ 211 013c 46505520 		.ascii	"FPU active!\015\012\000"
+ 211      61637469 
+ 211      7665210D 
+ 211      0A00
+ 212              		.section	.text.rt_hw_hard_fault_exception,"ax",%progbits
+ 213              		.align	1
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 9
+
+
+ 214              		.global	rt_hw_hard_fault_exception
+ 215              		.syntax unified
+ 216              		.thumb
+ 217              		.thumb_func
+ 218              		.fpu softvfp
+ 220              	rt_hw_hard_fault_exception:
+ 221              	.LVL10:
+ 222              	.LFB17:
+ 186:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 187:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #define SCB_CFSR        (*(volatile const unsigned *)0xE000ED28) /* Configurable Fault Status Regis
+ 188:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #define SCB_HFSR        (*(volatile const unsigned *)0xE000ED2C) /* HardFault Status Register */
+ 189:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #define SCB_MMAR        (*(volatile const unsigned *)0xE000ED34) /* MemManage Fault Address registe
+ 190:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #define SCB_BFAR        (*(volatile const unsigned *)0xE000ED38) /* Bus Fault Address Register */
+ 191:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #define SCB_AIRCR       (*(volatile unsigned long *)0xE000ED0C)  /* Reset control Address Register 
+ 192:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #define SCB_RESET_VALUE 0x05FA0004                               /* Reset value, write to SCB_AIRCR
+ 193:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 194:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #define SCB_CFSR_MFSR   (*(volatile const unsigned char*)0xE000ED28)  /* Memory-management Fault St
+ 195:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #define SCB_CFSR_BFSR   (*(volatile const unsigned char*)0xE000ED29)  /* Bus Fault Status Register 
+ 196:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #define SCB_CFSR_UFSR   (*(volatile const unsigned short*)0xE000ED2A) /* Usage Fault Status Registe
+ 197:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 198:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #ifdef RT_USING_FINSH
+ 199:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** static void usage_fault_track(void)
+ 200:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** {
+ 201:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("usage fault:\n");
+ 202:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("SCB_CFSR_UFSR:0x%02X ", SCB_CFSR_UFSR);
+ 203:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 204:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_CFSR_UFSR & (1<<0))
+ 205:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 206:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [0]:UNDEFINSTR */
+ 207:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("UNDEFINSTR ");
+ 208:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 209:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 210:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_CFSR_UFSR & (1<<1))
+ 211:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 212:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [1]:INVSTATE */
+ 213:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("INVSTATE ");
+ 214:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 215:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 216:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_CFSR_UFSR & (1<<2))
+ 217:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 218:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [2]:INVPC */
+ 219:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("INVPC ");
+ 220:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 221:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 222:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_CFSR_UFSR & (1<<3))
+ 223:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 224:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [3]:NOCP */
+ 225:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("NOCP ");
+ 226:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 227:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 228:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_CFSR_UFSR & (1<<8))
+ 229:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 230:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [8]:UNALIGNED */
+ 231:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("UNALIGNED ");
+ 232:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 233:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 234:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_CFSR_UFSR & (1<<9))
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 10
+
+
+ 235:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 236:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [9]:DIVBYZERO */
+ 237:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("DIVBYZERO ");
+ 238:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 239:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 240:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("\n");
+ 241:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** }
+ 242:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 243:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** static void bus_fault_track(void)
+ 244:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** {
+ 245:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("bus fault:\n");
+ 246:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("SCB_CFSR_BFSR:0x%02X ", SCB_CFSR_BFSR);
+ 247:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 248:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_CFSR_BFSR & (1<<0))
+ 249:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 250:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [0]:IBUSERR */
+ 251:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("IBUSERR ");
+ 252:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 253:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 254:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_CFSR_BFSR & (1<<1))
+ 255:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 256:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [1]:PRECISERR */
+ 257:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("PRECISERR ");
+ 258:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 259:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 260:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_CFSR_BFSR & (1<<2))
+ 261:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 262:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [2]:IMPRECISERR */
+ 263:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("IMPRECISERR ");
+ 264:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 265:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 266:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_CFSR_BFSR & (1<<3))
+ 267:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 268:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [3]:UNSTKERR */
+ 269:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("UNSTKERR ");
+ 270:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 271:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 272:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_CFSR_BFSR & (1<<4))
+ 273:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 274:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [4]:STKERR */
+ 275:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("STKERR ");
+ 276:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 277:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 278:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_CFSR_BFSR & (1<<7))
+ 279:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 280:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("SCB->BFAR:%08X\n", SCB_BFAR);
+ 281:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 282:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     else
+ 283:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 284:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("\n");
+ 285:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 286:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** }
+ 287:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 288:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** static void mem_manage_fault_track(void)
+ 289:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** {
+ 290:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("mem manage fault:\n");
+ 291:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("SCB_CFSR_MFSR:0x%02X ", SCB_CFSR_MFSR);
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 11
+
+
+ 292:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 293:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_CFSR_MFSR & (1<<0))
+ 294:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 295:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [0]:IACCVIOL */
+ 296:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("IACCVIOL ");
+ 297:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 298:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 299:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_CFSR_MFSR & (1<<1))
+ 300:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 301:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [1]:DACCVIOL */
+ 302:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("DACCVIOL ");
+ 303:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 304:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 305:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_CFSR_MFSR & (1<<3))
+ 306:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 307:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [3]:MUNSTKERR */
+ 308:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("MUNSTKERR ");
+ 309:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 310:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 311:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_CFSR_MFSR & (1<<4))
+ 312:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 313:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [4]:MSTKERR */
+ 314:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("MSTKERR ");
+ 315:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 316:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 317:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_CFSR_MFSR & (1<<7))
+ 318:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 319:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [7]:MMARVALID */
+ 320:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("SCB->MMAR:%08X\n", SCB_MMAR);
+ 321:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 322:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     else
+ 323:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 324:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("\n");
+ 325:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 326:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** }
+ 327:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 328:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** static void hard_fault_track(void)
+ 329:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** {
+ 330:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_HFSR & (1UL<<1))
+ 331:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 332:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [1]:VECTBL, Indicates hard fault is caused by failed vector fetch. */
+ 333:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("failed vector fetch\n");
+ 334:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 335:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 336:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_HFSR & (1UL<<30))
+ 337:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 338:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [30]:FORCED, Indicates hard fault is taken because of bus fault,
+ 339:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****                         memory management fault, or usage fault. */
+ 340:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         if(SCB_CFSR_BFSR)
+ 341:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         {
+ 342:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****             bus_fault_track();
+ 343:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         }
+ 344:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 345:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         if(SCB_CFSR_MFSR)
+ 346:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         {
+ 347:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****             mem_manage_fault_track();
+ 348:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         }
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 12
+
+
+ 349:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 350:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         if(SCB_CFSR_UFSR)
+ 351:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         {
+ 352:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****             usage_fault_track();
+ 353:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         }
+ 354:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 355:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 356:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if(SCB_HFSR & (1UL<<31))
+ 357:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 358:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         /* [31]:DEBUGEVT, Indicates hard fault is triggered by debug event. */
+ 359:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("debug event\n");
+ 360:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 361:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** }
+ 362:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #endif /* RT_USING_FINSH */
+ 363:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 364:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** struct exception_info
+ 365:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** {
+ 366:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_uint32_t exc_return;
+ 367:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     struct stack_frame stack_frame;
+ 368:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** };
+ 369:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 370:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** void rt_hw_hard_fault_exception(struct exception_info *exception_info)
+ 371:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** {
+ 223              		.loc 1 371 1 is_stmt 1 view -0
+ 224              		.cfi_startproc
+ 225              		@ args = 0, pretend = 0, frame = 0
+ 226              		@ frame_needed = 0, uses_anonymous_args = 0
+ 227              		.loc 1 371 1 is_stmt 0 view .LVU47
+ 228 0000 10B5     		push	{r4, lr}
+ 229              	.LCFI2:
+ 230              		.cfi_def_cfa_offset 8
+ 231              		.cfi_offset 4, -8
+ 232              		.cfi_offset 14, -4
+ 233 0002 0446     		mov	r4, r0
+ 372:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     extern long list_thread(void);
+ 234              		.loc 1 372 5 is_stmt 1 view .LVU48
+ 373:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     struct exception_stack_frame *exception_stack = &exception_info->stack_frame.exception_stack_fr
+ 235              		.loc 1 373 5 view .LVU49
+ 236              	.LVL11:
+ 374:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     struct stack_frame *context = &exception_info->stack_frame;
+ 237              		.loc 1 374 5 view .LVU50
+ 375:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 376:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if (rt_exception_hook != RT_NULL)
+ 238              		.loc 1 376 5 view .LVU51
+ 239              		.loc 1 376 27 is_stmt 0 view .LVU52
+ 240 0004 2F4B     		ldr	r3, .L19
+ 241 0006 1B68     		ldr	r3, [r3]
+ 242              		.loc 1 376 8 view .LVU53
+ 243 0008 1BB1     		cbz	r3, .L12
+ 244 000a 2430     		adds	r0, r0, #36
+ 245              	.LVL12:
+ 246              	.LBB2:
+ 377:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 378:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_err_t result;
+ 247              		.loc 1 378 9 is_stmt 1 view .LVU54
+ 379:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 380:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         result = rt_exception_hook(exception_stack);
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 13
+
+
+ 248              		.loc 1 380 9 view .LVU55
+ 249              		.loc 1 380 18 is_stmt 0 view .LVU56
+ 250 000c 9847     		blx	r3
+ 251              	.LVL13:
+ 381:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         if (result == RT_EOK) return;
+ 252              		.loc 1 381 9 is_stmt 1 view .LVU57
+ 253              		.loc 1 381 12 is_stmt 0 view .LVU58
+ 254 000e 0028     		cmp	r0, #0
+ 255 0010 56D0     		beq	.L16
+ 256              	.LVL14:
+ 257              	.L12:
+ 258              		.loc 1 381 12 view .LVU59
+ 259              	.LBE2:
+ 382:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 383:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 384:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("psr: 0x%08x\n", context->exception_stack_frame.psr);
+ 260              		.loc 1 384 5 is_stmt 1 view .LVU60
+ 261 0012 216C     		ldr	r1, [r4, #64]
+ 262 0014 2C48     		ldr	r0, .L19+4
+ 263 0016 FFF7FEFF 		bl	rt_kprintf
+ 264              	.LVL15:
+ 385:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 386:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("r00: 0x%08x\n", context->exception_stack_frame.r0);
+ 265              		.loc 1 386 5 view .LVU61
+ 266 001a 616A     		ldr	r1, [r4, #36]
+ 267 001c 2B48     		ldr	r0, .L19+8
+ 268 001e FFF7FEFF 		bl	rt_kprintf
+ 269              	.LVL16:
+ 387:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("r01: 0x%08x\n", context->exception_stack_frame.r1);
+ 270              		.loc 1 387 5 view .LVU62
+ 271 0022 A16A     		ldr	r1, [r4, #40]
+ 272 0024 2A48     		ldr	r0, .L19+12
+ 273 0026 FFF7FEFF 		bl	rt_kprintf
+ 274              	.LVL17:
+ 388:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("r02: 0x%08x\n", context->exception_stack_frame.r2);
+ 275              		.loc 1 388 5 view .LVU63
+ 276 002a E16A     		ldr	r1, [r4, #44]
+ 277 002c 2948     		ldr	r0, .L19+16
+ 278 002e FFF7FEFF 		bl	rt_kprintf
+ 279              	.LVL18:
+ 389:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("r03: 0x%08x\n", context->exception_stack_frame.r3);
+ 280              		.loc 1 389 5 view .LVU64
+ 281 0032 216B     		ldr	r1, [r4, #48]
+ 282 0034 2848     		ldr	r0, .L19+20
+ 283 0036 FFF7FEFF 		bl	rt_kprintf
+ 284              	.LVL19:
+ 390:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("r04: 0x%08x\n", context->r4);
+ 285              		.loc 1 390 5 view .LVU65
+ 286 003a 6168     		ldr	r1, [r4, #4]
+ 287 003c 2748     		ldr	r0, .L19+24
+ 288 003e FFF7FEFF 		bl	rt_kprintf
+ 289              	.LVL20:
+ 391:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("r05: 0x%08x\n", context->r5);
+ 290              		.loc 1 391 5 view .LVU66
+ 291 0042 A168     		ldr	r1, [r4, #8]
+ 292 0044 2648     		ldr	r0, .L19+28
+ 293 0046 FFF7FEFF 		bl	rt_kprintf
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 14
+
+
+ 294              	.LVL21:
+ 392:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("r06: 0x%08x\n", context->r6);
+ 295              		.loc 1 392 5 view .LVU67
+ 296 004a E168     		ldr	r1, [r4, #12]
+ 297 004c 2548     		ldr	r0, .L19+32
+ 298 004e FFF7FEFF 		bl	rt_kprintf
+ 299              	.LVL22:
+ 393:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("r07: 0x%08x\n", context->r7);
+ 300              		.loc 1 393 5 view .LVU68
+ 301 0052 2169     		ldr	r1, [r4, #16]
+ 302 0054 2448     		ldr	r0, .L19+36
+ 303 0056 FFF7FEFF 		bl	rt_kprintf
+ 304              	.LVL23:
+ 394:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("r08: 0x%08x\n", context->r8);
+ 305              		.loc 1 394 5 view .LVU69
+ 306 005a 6169     		ldr	r1, [r4, #20]
+ 307 005c 2348     		ldr	r0, .L19+40
+ 308 005e FFF7FEFF 		bl	rt_kprintf
+ 309              	.LVL24:
+ 395:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("r09: 0x%08x\n", context->r9);
+ 310              		.loc 1 395 5 view .LVU70
+ 311 0062 A169     		ldr	r1, [r4, #24]
+ 312 0064 2248     		ldr	r0, .L19+44
+ 313 0066 FFF7FEFF 		bl	rt_kprintf
+ 314              	.LVL25:
+ 396:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("r10: 0x%08x\n", context->r10);
+ 315              		.loc 1 396 5 view .LVU71
+ 316 006a E169     		ldr	r1, [r4, #28]
+ 317 006c 2148     		ldr	r0, .L19+48
+ 318 006e FFF7FEFF 		bl	rt_kprintf
+ 319              	.LVL26:
+ 397:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("r11: 0x%08x\n", context->r11);
+ 320              		.loc 1 397 5 view .LVU72
+ 321 0072 216A     		ldr	r1, [r4, #32]
+ 322 0074 2048     		ldr	r0, .L19+52
+ 323 0076 FFF7FEFF 		bl	rt_kprintf
+ 324              	.LVL27:
+ 398:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("r12: 0x%08x\n", context->exception_stack_frame.r12);
+ 325              		.loc 1 398 5 view .LVU73
+ 326 007a 616B     		ldr	r1, [r4, #52]
+ 327 007c 1F48     		ldr	r0, .L19+56
+ 328 007e FFF7FEFF 		bl	rt_kprintf
+ 329              	.LVL28:
+ 399:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf(" lr: 0x%08x\n", context->exception_stack_frame.lr);
+ 330              		.loc 1 399 5 view .LVU74
+ 331 0082 A16B     		ldr	r1, [r4, #56]
+ 332 0084 1E48     		ldr	r0, .L19+60
+ 333 0086 FFF7FEFF 		bl	rt_kprintf
+ 334              	.LVL29:
+ 400:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf(" pc: 0x%08x\n", context->exception_stack_frame.pc);
+ 335              		.loc 1 400 5 view .LVU75
+ 336 008a E16B     		ldr	r1, [r4, #60]
+ 337 008c 1D48     		ldr	r0, .L19+64
+ 338 008e FFF7FEFF 		bl	rt_kprintf
+ 339              	.LVL30:
+ 401:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 402:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if (exception_info->exc_return & (1 << 2))
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 15
+
+
+ 340              		.loc 1 402 5 view .LVU76
+ 341              		.loc 1 402 23 is_stmt 0 view .LVU77
+ 342 0092 2368     		ldr	r3, [r4]
+ 343              		.loc 1 402 8 view .LVU78
+ 344 0094 13F0040F 		tst	r3, #4
+ 345 0098 0AD0     		beq	.L13
+ 403:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 404:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("hard fault on thread: %s\r\n\r\n", rt_thread_self()->name);
+ 346              		.loc 1 404 9 is_stmt 1 view .LVU79
+ 347              		.loc 1 404 56 is_stmt 0 view .LVU80
+ 348 009a FFF7FEFF 		bl	rt_thread_self
+ 349              	.LVL31:
+ 350 009e 0146     		mov	r1, r0
+ 351              		.loc 1 404 9 view .LVU81
+ 352 00a0 1948     		ldr	r0, .L19+68
+ 353 00a2 FFF7FEFF 		bl	rt_kprintf
+ 354              	.LVL32:
+ 355              	.L14:
+ 405:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 406:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #ifdef RT_USING_FINSH
+ 407:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         list_thread();
+ 408:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #endif
+ 409:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 410:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     else
+ 411:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 412:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("hard fault on handler\r\n\r\n");
+ 413:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 414:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 415:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     if ( (exception_info->exc_return & 0x10) == 0)
+ 356              		.loc 1 415 5 is_stmt 1 view .LVU82
+ 357              		.loc 1 415 25 is_stmt 0 view .LVU83
+ 358 00a6 2368     		ldr	r3, [r4]
+ 359              		.loc 1 415 8 view .LVU84
+ 360 00a8 13F0100F 		tst	r3, #16
+ 361 00ac 04D0     		beq	.L18
+ 362              	.L15:
+ 416:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     {
+ 417:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****         rt_kprintf("FPU active!\r\n");
+ 418:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 419:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 420:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #ifdef RT_USING_FINSH
+ 421:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     hard_fault_track();
+ 422:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** #endif /* RT_USING_FINSH */
+ 423:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 424:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     while (1);
+ 363              		.loc 1 424 5 is_stmt 1 discriminator 1 view .LVU85
+ 364              		.loc 1 424 14 discriminator 1 view .LVU86
+ 365              		.loc 1 424 11 discriminator 1 view .LVU87
+ 366 00ae FEE7     		b	.L15
+ 367              	.L13:
+ 412:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 368              		.loc 1 412 9 view .LVU88
+ 369 00b0 1648     		ldr	r0, .L19+72
+ 370 00b2 FFF7FEFF 		bl	rt_kprintf
+ 371              	.LVL33:
+ 372 00b6 F6E7     		b	.L14
+ 373              	.L18:
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 16
+
+
+ 417:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     }
+ 374              		.loc 1 417 9 view .LVU89
+ 375 00b8 1548     		ldr	r0, .L19+76
+ 376 00ba FFF7FEFF 		bl	rt_kprintf
+ 377              	.LVL34:
+ 378 00be F6E7     		b	.L15
+ 379              	.LVL35:
+ 380              	.L16:
+ 425:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** }
+ 381              		.loc 1 425 1 is_stmt 0 view .LVU90
+ 382 00c0 10BD     		pop	{r4, pc}
+ 383              	.LVL36:
+ 384              	.L20:
+ 385              		.loc 1 425 1 view .LVU91
+ 386 00c2 00BF     		.align	2
+ 387              	.L19:
+ 388 00c4 00000000 		.word	.LANCHOR0
+ 389 00c8 00000000 		.word	.LC0
+ 390 00cc 10000000 		.word	.LC1
+ 391 00d0 20000000 		.word	.LC2
+ 392 00d4 30000000 		.word	.LC3
+ 393 00d8 40000000 		.word	.LC4
+ 394 00dc 50000000 		.word	.LC5
+ 395 00e0 60000000 		.word	.LC6
+ 396 00e4 70000000 		.word	.LC7
+ 397 00e8 80000000 		.word	.LC8
+ 398 00ec 90000000 		.word	.LC9
+ 399 00f0 A0000000 		.word	.LC10
+ 400 00f4 B0000000 		.word	.LC11
+ 401 00f8 C0000000 		.word	.LC12
+ 402 00fc D0000000 		.word	.LC13
+ 403 0100 E0000000 		.word	.LC14
+ 404 0104 F0000000 		.word	.LC15
+ 405 0108 00010000 		.word	.LC16
+ 406 010c 20010000 		.word	.LC17
+ 407 0110 3C010000 		.word	.LC18
+ 408              		.cfi_endproc
+ 409              	.LFE17:
+ 411              		.section	.rodata.rt_hw_cpu_shutdown.str1.4,"aMS",%progbits,1
+ 412              		.align	2
+ 413              	.LC19:
+ 414 0000 73687574 		.ascii	"shutdown...\012\000"
+ 414      646F776E 
+ 414      2E2E2E0A 
+ 414      00
+ 415              		.section	.text.rt_hw_cpu_shutdown,"ax",%progbits
+ 416              		.align	1
+ 417              		.global	rt_hw_cpu_shutdown
+ 418              		.syntax unified
+ 419              		.thumb
+ 420              		.thumb_func
+ 421              		.fpu softvfp
+ 423              	rt_hw_cpu_shutdown:
+ 424              	.LFB18:
+ 426:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 427:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** /**
+ 428:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  * shutdown CPU
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 17
+
+
+ 429:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  */
+ 430:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** void rt_hw_cpu_shutdown(void)
+ 431:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** {
+ 425              		.loc 1 431 1 is_stmt 1 view -0
+ 426              		.cfi_startproc
+ 427              		@ args = 0, pretend = 0, frame = 0
+ 428              		@ frame_needed = 0, uses_anonymous_args = 0
+ 429 0000 08B5     		push	{r3, lr}
+ 430              	.LCFI3:
+ 431              		.cfi_def_cfa_offset 8
+ 432              		.cfi_offset 3, -8
+ 433              		.cfi_offset 14, -4
+ 432:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     rt_kprintf("shutdown...\n");
+ 434              		.loc 1 432 5 view .LVU93
+ 435 0002 0248     		ldr	r0, .L23
+ 436 0004 FFF7FEFF 		bl	rt_kprintf
+ 437              	.LVL37:
+ 433:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 434:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     RT_ASSERT(0);
+ 438              		.loc 1 434 17 view .LVU94
+ 435:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** }
+ 439              		.loc 1 435 1 is_stmt 0 view .LVU95
+ 440 0008 08BD     		pop	{r3, pc}
+ 441              	.L24:
+ 442 000a 00BF     		.align	2
+ 443              	.L23:
+ 444 000c 00000000 		.word	.LC19
+ 445              		.cfi_endproc
+ 446              	.LFE18:
+ 448              		.section	.text.rt_hw_cpu_reset,"ax",%progbits
+ 449              		.align	1
+ 450              		.weak	rt_hw_cpu_reset
+ 451              		.syntax unified
+ 452              		.thumb
+ 453              		.thumb_func
+ 454              		.fpu softvfp
+ 456              	rt_hw_cpu_reset:
+ 457              	.LFB19:
+ 436:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** 
+ 437:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** /**
+ 438:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  * reset CPU
+ 439:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****  */
+ 440:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** RT_WEAK void rt_hw_cpu_reset(void)
+ 441:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** {
+ 458              		.loc 1 441 1 is_stmt 1 view -0
+ 459              		.cfi_startproc
+ 460              		@ args = 0, pretend = 0, frame = 0
+ 461              		@ frame_needed = 0, uses_anonymous_args = 0
+ 462              		@ link register save eliminated.
+ 442:RT-Thread/libcpu/arm/cortex-m4/cpuport.c ****     SCB_AIRCR = SCB_RESET_VALUE;
+ 463              		.loc 1 442 5 view .LVU97
+ 464              		.loc 1 442 15 is_stmt 0 view .LVU98
+ 465 0000 014B     		ldr	r3, .L26
+ 466 0002 024A     		ldr	r2, .L26+4
+ 467 0004 1A60     		str	r2, [r3]
+ 443:RT-Thread/libcpu/arm/cortex-m4/cpuport.c **** }
+ 468              		.loc 1 443 1 view .LVU99
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 18
+
+
+ 469 0006 7047     		bx	lr
+ 470              	.L27:
+ 471              		.align	2
+ 472              	.L26:
+ 473 0008 0CED00E0 		.word	-536810228
+ 474 000c 0400FA05 		.word	100270084
+ 475              		.cfi_endproc
+ 476              	.LFE19:
+ 478              		.comm	rt_thread_switch_interrupt_flag,4,4
+ 479              		.comm	rt_interrupt_to_thread,4,4
+ 480              		.comm	rt_interrupt_from_thread,4,4
+ 481              		.section	.bss.rt_exception_hook,"aw",%nobits
+ 482              		.align	2
+ 483              		.set	.LANCHOR0,. + 0
+ 486              	rt_exception_hook:
+ 487 0000 00000000 		.space	4
+ 488              		.text
+ 489              	.Letext0:
+ 490              		.file 2 "RT-Thread/include/rtdef.h"
+ 491              		.file 3 "RT-Thread/include/rtthread.h"
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s 			page 19
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 cpuport.c
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:16     .text.rt_hw_stack_init:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:24     .text.rt_hw_stack_init:00000000 rt_hw_stack_init
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:121    .text.rt_hw_stack_init:00000048 $d
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:126    .text.rt_hw_exception_install:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:133    .text.rt_hw_exception_install:00000000 rt_hw_exception_install
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:150    .text.rt_hw_exception_install:00000008 $d
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:155    .rodata.rt_hw_hard_fault_exception.str1.4:00000000 $d
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:213    .text.rt_hw_hard_fault_exception:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:220    .text.rt_hw_hard_fault_exception:00000000 rt_hw_hard_fault_exception
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:388    .text.rt_hw_hard_fault_exception:000000c4 $d
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:412    .rodata.rt_hw_cpu_shutdown.str1.4:00000000 $d
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:416    .text.rt_hw_cpu_shutdown:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:423    .text.rt_hw_cpu_shutdown:00000000 rt_hw_cpu_shutdown
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:444    .text.rt_hw_cpu_shutdown:0000000c $d
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:449    .text.rt_hw_cpu_reset:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:456    .text.rt_hw_cpu_reset:00000000 rt_hw_cpu_reset
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:473    .text.rt_hw_cpu_reset:00000008 $d
+                            *COM*:00000004 rt_thread_switch_interrupt_flag
+                            *COM*:00000004 rt_interrupt_to_thread
+                            *COM*:00000004 rt_interrupt_from_thread
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:482    .bss.rt_exception_hook:00000000 $d
+C:\Users\yzy\AppData\Local\Temp\ccVnKVkg.s:486    .bss.rt_exception_hook:00000000 rt_exception_hook
+
+UNDEFINED SYMBOLS
+rt_kprintf
+rt_thread_self

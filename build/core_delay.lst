@@ -1,0 +1,373 @@
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\cckypYwP.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"core_delay.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.HAL_InitTick,"ax",%progbits
+  16              		.align	1
+  17              		.global	HAL_InitTick
+  18              		.arch armv7e-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	HAL_InitTick:
+  25              	.LVL0:
+  26              	.LFB130:
+  27              		.file 1 "RT-Thread/bsp/core_delay.c"
+   1:RT-Thread/bsp/core_delay.c **** /*
+   2:RT-Thread/bsp/core_delay.c ****  * @Author: your name
+   3:RT-Thread/bsp/core_delay.c ****  * @Date: 2020-10-15 15:55:17
+   4:RT-Thread/bsp/core_delay.c ****  * @LastEditTime: 2020-10-15 15:59:00
+   5:RT-Thread/bsp/core_delay.c ****  * @LastEditors: Please set LastEditors
+   6:RT-Thread/bsp/core_delay.c ****  * @Description: In User Settings Edit
+   7:RT-Thread/bsp/core_delay.c ****  * @FilePath: \F407_RT_HAL\RT-Thread\bsp\core_delay.c
+   8:RT-Thread/bsp/core_delay.c ****  */
+   9:RT-Thread/bsp/core_delay.c **** #include "core_delay.h"
+  10:RT-Thread/bsp/core_delay.c **** 
+  11:RT-Thread/bsp/core_delay.c **** HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
+  12:RT-Thread/bsp/core_delay.c **** {
+  28              		.loc 1 12 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  13:RT-Thread/bsp/core_delay.c **** 
+  14:RT-Thread/bsp/core_delay.c ****     DEM_CR |= (uint32_t)DEM_CR_TRCENA;
+  33              		.loc 1 14 5 view .LVU1
+  34              		.loc 1 14 12 is_stmt 0 view .LVU2
+  35 0000 064A     		ldr	r2, .L2
+  36 0002 1368     		ldr	r3, [r2]
+  37 0004 43F08073 		orr	r3, r3, #16777216
+  38 0008 1360     		str	r3, [r2]
+  15:RT-Thread/bsp/core_delay.c **** 
+  16:RT-Thread/bsp/core_delay.c **** /* DWT CYCCNT 寄存器计数清 0 */
+  17:RT-Thread/bsp/core_delay.c ****     DWT_CYCCNT = (uint32_t)0u;
+  39              		.loc 1 17 5 is_stmt 1 view .LVU3
+  40              		.loc 1 17 16 is_stmt 0 view .LVU4
+  41 000a 0020     		movs	r0, #0
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\cckypYwP.s 			page 2
+
+
+  42              	.LVL1:
+  43              		.loc 1 17 16 view .LVU5
+  44 000c 044B     		ldr	r3, .L2+4
+  45 000e 1860     		str	r0, [r3]
+  18:RT-Thread/bsp/core_delay.c **** 
+  19:RT-Thread/bsp/core_delay.c **** /* 使能 Cortex-M DWT CYCCNT 寄存器 */
+  20:RT-Thread/bsp/core_delay.c ****     DWT_CR |= (uint32_t)DWT_CR_CYCCNTENA;
+  46              		.loc 1 20 5 is_stmt 1 view .LVU6
+  47              		.loc 1 20 12 is_stmt 0 view .LVU7
+  48 0010 044A     		ldr	r2, .L2+8
+  49 0012 1368     		ldr	r3, [r2]
+  50 0014 43F00103 		orr	r3, r3, #1
+  51 0018 1360     		str	r3, [r2]
+  21:RT-Thread/bsp/core_delay.c **** 
+  22:RT-Thread/bsp/core_delay.c ****     return HAL_OK;
+  52              		.loc 1 22 5 is_stmt 1 view .LVU8
+  23:RT-Thread/bsp/core_delay.c **** }
+  53              		.loc 1 23 1 is_stmt 0 view .LVU9
+  54 001a 7047     		bx	lr
+  55              	.L3:
+  56              		.align	2
+  57              	.L2:
+  58 001c FCED00E0 		.word	-536809988
+  59 0020 041000E0 		.word	-536866812
+  60 0024 001000E0 		.word	-536866816
+  61              		.cfi_endproc
+  62              	.LFE130:
+  64              		.section	.text.CPU_TS_TmrRd,"ax",%progbits
+  65              		.align	1
+  66              		.global	CPU_TS_TmrRd
+  67              		.syntax unified
+  68              		.thumb
+  69              		.thumb_func
+  70              		.fpu softvfp
+  72              	CPU_TS_TmrRd:
+  73              	.LFB131:
+  24:RT-Thread/bsp/core_delay.c **** 
+  25:RT-Thread/bsp/core_delay.c **** /**
+  26:RT-Thread/bsp/core_delay.c **** * @brief 读取当前时间戳
+  27:RT-Thread/bsp/core_delay.c **** * @param 无
+  28:RT-Thread/bsp/core_delay.c **** * @retval 当前时间戳，即 DWT_CYCCNT 寄存器的值
+  29:RT-Thread/bsp/core_delay.c **** */
+  30:RT-Thread/bsp/core_delay.c **** uint32_t CPU_TS_TmrRd(void)
+  31:RT-Thread/bsp/core_delay.c **** {
+  74              		.loc 1 31 1 is_stmt 1 view -0
+  75              		.cfi_startproc
+  76              		@ args = 0, pretend = 0, frame = 0
+  77              		@ frame_needed = 0, uses_anonymous_args = 0
+  78              		@ link register save eliminated.
+  32:RT-Thread/bsp/core_delay.c **** return ((uint32_t)DWT_CYCCNT);
+  79              		.loc 1 32 1 view .LVU11
+  80              		.loc 1 32 9 is_stmt 0 view .LVU12
+  81 0000 014B     		ldr	r3, .L5
+  82 0002 1868     		ldr	r0, [r3]
+  33:RT-Thread/bsp/core_delay.c **** }
+  83              		.loc 1 33 1 view .LVU13
+  84 0004 7047     		bx	lr
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\cckypYwP.s 			page 3
+
+
+  85              	.L6:
+  86 0006 00BF     		.align	2
+  87              	.L5:
+  88 0008 041000E0 		.word	-536866812
+  89              		.cfi_endproc
+  90              	.LFE131:
+  92              		.section	.text.HAL_GetTick,"ax",%progbits
+  93              		.align	1
+  94              		.global	HAL_GetTick
+  95              		.syntax unified
+  96              		.thumb
+  97              		.thumb_func
+  98              		.fpu softvfp
+ 100              	HAL_GetTick:
+ 101              	.LFB132:
+  34:RT-Thread/bsp/core_delay.c **** 
+  35:RT-Thread/bsp/core_delay.c **** /**
+  36:RT-Thread/bsp/core_delay.c **** * @brief 读取当前时间戳
+  37:RT-Thread/bsp/core_delay.c **** * @param 无
+  38:RT-Thread/bsp/core_delay.c **** * @retval 当前时间戳，即 DWT_CYCCNT 寄存器的值
+  39:RT-Thread/bsp/core_delay.c **** */
+  40:RT-Thread/bsp/core_delay.c **** uint32_t HAL_GetTick(void)
+  41:RT-Thread/bsp/core_delay.c **** {
+ 102              		.loc 1 41 1 is_stmt 1 view -0
+ 103              		.cfi_startproc
+ 104              		@ args = 0, pretend = 0, frame = 0
+ 105              		@ frame_needed = 0, uses_anonymous_args = 0
+ 106              		@ link register save eliminated.
+  42:RT-Thread/bsp/core_delay.c **** return ((uint32_t)DWT_CYCCNT*1000/SysClockFreq);
+ 107              		.loc 1 42 1 view .LVU15
+ 108              		.loc 1 42 9 is_stmt 0 view .LVU16
+ 109 0000 054B     		ldr	r3, .L8
+ 110 0002 1B68     		ldr	r3, [r3]
+ 111              		.loc 1 42 29 view .LVU17
+ 112 0004 4FF47A70 		mov	r0, #1000
+ 113 0008 00FB03F0 		mul	r0, r0, r3
+ 114              		.loc 1 42 34 view .LVU18
+ 115 000c 034B     		ldr	r3, .L8+4
+ 116 000e A3FB0030 		umull	r3, r0, r3, r0
+  43:RT-Thread/bsp/core_delay.c **** }
+ 117              		.loc 1 43 1 view .LVU19
+ 118 0012 800E     		lsrs	r0, r0, #26
+ 119 0014 7047     		bx	lr
+ 120              	.L9:
+ 121 0016 00BF     		.align	2
+ 122              	.L8:
+ 123 0018 041000E0 		.word	-536866812
+ 124 001c 29D94266 		.word	1715657001
+ 125              		.cfi_endproc
+ 126              	.LFE132:
+ 128              		.section	.text.CPU_TS_Tmr_Delay_US,"ax",%progbits
+ 129              		.align	1
+ 130              		.global	CPU_TS_Tmr_Delay_US
+ 131              		.syntax unified
+ 132              		.thumb
+ 133              		.thumb_func
+ 134              		.fpu softvfp
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\cckypYwP.s 			page 4
+
+
+ 136              	CPU_TS_Tmr_Delay_US:
+ 137              	.LVL2:
+ 138              	.LFB133:
+  44:RT-Thread/bsp/core_delay.c **** 
+  45:RT-Thread/bsp/core_delay.c **** /**
+  46:RT-Thread/bsp/core_delay.c **** * @brief 采用 CPU 的内部计数实现精确延时， 32 位计数器
+  47:RT-Thread/bsp/core_delay.c **** * @param us : 延迟长度，单位 1 us
+  48:RT-Thread/bsp/core_delay.c **** * @retval 无
+  49:RT-Thread/bsp/core_delay.c **** * @note 使用本函数前必须先调用 CPU_TS_TmrInit 函数使能计数器，
+  50:RT-Thread/bsp/core_delay.c **** 或使能宏 CPU_TS_INIT_IN_DELAY_FUNCTION
+  51:RT-Thread/bsp/core_delay.c **** 最大延时值为 8 秒，即 8*1000*1000
+  52:RT-Thread/bsp/core_delay.c **** */
+  53:RT-Thread/bsp/core_delay.c **** void CPU_TS_Tmr_Delay_US(uint32_t us)
+  54:RT-Thread/bsp/core_delay.c **** {
+ 139              		.loc 1 54 1 is_stmt 1 view -0
+ 140              		.cfi_startproc
+ 141              		@ args = 0, pretend = 0, frame = 0
+ 142              		@ frame_needed = 0, uses_anonymous_args = 0
+ 143              		.loc 1 54 1 is_stmt 0 view .LVU21
+ 144 0000 70B5     		push	{r4, r5, r6, lr}
+ 145              	.LCFI0:
+ 146              		.cfi_def_cfa_offset 16
+ 147              		.cfi_offset 4, -16
+ 148              		.cfi_offset 5, -12
+ 149              		.cfi_offset 6, -8
+ 150              		.cfi_offset 14, -4
+ 151 0002 0646     		mov	r6, r0
+  55:RT-Thread/bsp/core_delay.c ****     uint32_t ticks;
+ 152              		.loc 1 55 5 is_stmt 1 view .LVU22
+  56:RT-Thread/bsp/core_delay.c ****     uint32_t told,tnow,tcnt=0;
+ 153              		.loc 1 56 5 view .LVU23
+ 154              	.LVL3:
+  57:RT-Thread/bsp/core_delay.c **** 
+  58:RT-Thread/bsp/core_delay.c ****  /* 在函数内部初始化时间戳寄存器， */
+  59:RT-Thread/bsp/core_delay.c ****     #if (CPU_TS_INIT_IN_DELAY_FUNCTION)
+  60:RT-Thread/bsp/core_delay.c ****  /* 初始化时间戳并清零 */
+  61:RT-Thread/bsp/core_delay.c ****     HAL_InitTick(5);
+ 155              		.loc 1 61 5 view .LVU24
+ 156 0004 0520     		movs	r0, #5
+ 157              	.LVL4:
+ 158              		.loc 1 61 5 is_stmt 0 view .LVU25
+ 159 0006 FFF7FEFF 		bl	HAL_InitTick
+ 160              	.LVL5:
+  62:RT-Thread/bsp/core_delay.c ****     #endif
+  63:RT-Thread/bsp/core_delay.c **** 
+  64:RT-Thread/bsp/core_delay.c ****     ticks = us * (GET_CPU_ClkFreq() / 1000000); /* 需要的节拍数 */
+ 161              		.loc 1 64 5 is_stmt 1 view .LVU26
+ 162              		.loc 1 64 19 is_stmt 0 view .LVU27
+ 163 000a FFF7FEFF 		bl	HAL_RCC_GetSysClockFreq
+ 164              	.LVL6:
+ 165 000e 0346     		mov	r3, r0
+ 166              		.loc 1 64 37 view .LVU28
+ 167 0010 0C48     		ldr	r0, .L18
+ 168 0012 A0FB0323 		umull	r2, r3, r0, r3
+ 169 0016 9B0C     		lsrs	r3, r3, #18
+ 170              		.loc 1 64 11 view .LVU29
+ 171 0018 06FB03F6 		mul	r6, r6, r3
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\cckypYwP.s 			page 5
+
+
+ 172              	.LVL7:
+  65:RT-Thread/bsp/core_delay.c ****     tcnt = 0;
+ 173              		.loc 1 65 5 is_stmt 1 view .LVU30
+  66:RT-Thread/bsp/core_delay.c ****     told = (uint32_t)CPU_TS_TmrRd(); /* 刚进入时的计数器值 */
+ 174              		.loc 1 66 5 view .LVU31
+ 175              		.loc 1 66 22 is_stmt 0 view .LVU32
+ 176 001c FFF7FEFF 		bl	CPU_TS_TmrRd
+ 177              	.LVL8:
+ 178 0020 0446     		mov	r4, r0
+ 179              	.LVL9:
+  65:RT-Thread/bsp/core_delay.c ****     tcnt = 0;
+ 180              		.loc 1 65 10 view .LVU33
+ 181 0022 0025     		movs	r5, #0
+ 182 0024 05E0     		b	.L11
+ 183              	.LVL10:
+ 184              	.L13:
+  67:RT-Thread/bsp/core_delay.c **** 
+  68:RT-Thread/bsp/core_delay.c ****     while (1) {
+  69:RT-Thread/bsp/core_delay.c ****         tnow = (uint32_t)CPU_TS_TmrRd();
+  70:RT-Thread/bsp/core_delay.c ****         if (tnow != told) {
+  71:RT-Thread/bsp/core_delay.c ****  /* 32 位计数器是递增计数器 */
+  72:RT-Thread/bsp/core_delay.c ****             if (tnow > told) {
+  73:RT-Thread/bsp/core_delay.c ****                 tcnt += tnow - told;
+  74:RT-Thread/bsp/core_delay.c ****             }
+  75:RT-Thread/bsp/core_delay.c ****  /* 重新装载 */
+  76:RT-Thread/bsp/core_delay.c ****             else {
+  77:RT-Thread/bsp/core_delay.c ****                 tcnt += UINT32_MAX - told + tnow;
+ 185              		.loc 1 77 17 is_stmt 1 view .LVU34
+ 186              		.loc 1 77 43 is_stmt 0 view .LVU35
+ 187 0026 041B     		subs	r4, r0, r4
+ 188              	.LVL11:
+ 189              		.loc 1 77 22 view .LVU36
+ 190 0028 2C44     		add	r4, r4, r5
+ 191 002a 651E     		subs	r5, r4, #1
+ 192              	.LVL12:
+ 193              	.L14:
+  78:RT-Thread/bsp/core_delay.c ****             }
+  79:RT-Thread/bsp/core_delay.c **** 
+  80:RT-Thread/bsp/core_delay.c ****                 told = tnow;
+ 194              		.loc 1 80 17 is_stmt 1 view .LVU37
+  81:RT-Thread/bsp/core_delay.c **** 
+  82:RT-Thread/bsp/core_delay.c ****  /*时间超过/等于要延迟的时间,则退出 */
+  83:RT-Thread/bsp/core_delay.c ****                 if (tcnt >= ticks)break;
+ 195              		.loc 1 83 17 view .LVU38
+ 196              		.loc 1 83 20 is_stmt 0 view .LVU39
+ 197 002c B542     		cmp	r5, r6
+ 198 002e 08D2     		bcs	.L17
+  80:RT-Thread/bsp/core_delay.c **** 
+ 199              		.loc 1 80 22 view .LVU40
+ 200 0030 0446     		mov	r4, r0
+ 201              	.LVL13:
+ 202              	.L11:
+  68:RT-Thread/bsp/core_delay.c ****         tnow = (uint32_t)CPU_TS_TmrRd();
+ 203              		.loc 1 68 5 is_stmt 1 view .LVU41
+  69:RT-Thread/bsp/core_delay.c ****         if (tnow != told) {
+ 204              		.loc 1 69 9 view .LVU42
+  69:RT-Thread/bsp/core_delay.c ****         if (tnow != told) {
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\cckypYwP.s 			page 6
+
+
+ 205              		.loc 1 69 26 is_stmt 0 view .LVU43
+ 206 0032 FFF7FEFF 		bl	CPU_TS_TmrRd
+ 207              	.LVL14:
+  70:RT-Thread/bsp/core_delay.c ****  /* 32 位计数器是递增计数器 */
+ 208              		.loc 1 70 9 is_stmt 1 view .LVU44
+  70:RT-Thread/bsp/core_delay.c ****  /* 32 位计数器是递增计数器 */
+ 209              		.loc 1 70 12 is_stmt 0 view .LVU45
+ 210 0036 8442     		cmp	r4, r0
+ 211 0038 FBD0     		beq	.L11
+  72:RT-Thread/bsp/core_delay.c ****                 tcnt += tnow - told;
+ 212              		.loc 1 72 13 is_stmt 1 view .LVU46
+  72:RT-Thread/bsp/core_delay.c ****                 tcnt += tnow - told;
+ 213              		.loc 1 72 16 is_stmt 0 view .LVU47
+ 214 003a F4D2     		bcs	.L13
+  73:RT-Thread/bsp/core_delay.c ****             }
+ 215              		.loc 1 73 17 is_stmt 1 view .LVU48
+  73:RT-Thread/bsp/core_delay.c ****             }
+ 216              		.loc 1 73 30 is_stmt 0 view .LVU49
+ 217 003c 031B     		subs	r3, r0, r4
+  73:RT-Thread/bsp/core_delay.c ****             }
+ 218              		.loc 1 73 22 view .LVU50
+ 219 003e 1D44     		add	r5, r5, r3
+ 220              	.LVL15:
+  73:RT-Thread/bsp/core_delay.c ****             }
+ 221              		.loc 1 73 22 view .LVU51
+ 222 0040 F4E7     		b	.L14
+ 223              	.LVL16:
+ 224              	.L17:
+  84:RT-Thread/bsp/core_delay.c ****         }
+  85:RT-Thread/bsp/core_delay.c ****     }
+  86:RT-Thread/bsp/core_delay.c **** }
+ 225              		.loc 1 86 1 view .LVU52
+ 226 0042 70BD     		pop	{r4, r5, r6, pc}
+ 227              	.LVL17:
+ 228              	.L19:
+ 229              		.loc 1 86 1 view .LVU53
+ 230              		.align	2
+ 231              	.L18:
+ 232 0044 83DE1B43 		.word	1125899907
+ 233              		.cfi_endproc
+ 234              	.LFE133:
+ 236              		.text
+ 237              	.Letext0:
+ 238              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\2020-q2-update\\arm-none-eabi\\inclu
+ 239              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\2020-q2-update\\arm-none-eabi\\inclu
+ 240              		.file 4 "Libraries/CMSIS/Include/core_cm4.h"
+ 241              		.file 5 "Libraries/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 242              		.file 6 "Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 243              		.file 7 "Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ 244              		.file 8 "Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h"
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\cckypYwP.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 core_delay.c
+C:\Users\yzy\AppData\Local\Temp\cckypYwP.s:16     .text.HAL_InitTick:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\cckypYwP.s:24     .text.HAL_InitTick:00000000 HAL_InitTick
+C:\Users\yzy\AppData\Local\Temp\cckypYwP.s:58     .text.HAL_InitTick:0000001c $d
+C:\Users\yzy\AppData\Local\Temp\cckypYwP.s:65     .text.CPU_TS_TmrRd:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\cckypYwP.s:72     .text.CPU_TS_TmrRd:00000000 CPU_TS_TmrRd
+C:\Users\yzy\AppData\Local\Temp\cckypYwP.s:88     .text.CPU_TS_TmrRd:00000008 $d
+C:\Users\yzy\AppData\Local\Temp\cckypYwP.s:93     .text.HAL_GetTick:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\cckypYwP.s:100    .text.HAL_GetTick:00000000 HAL_GetTick
+C:\Users\yzy\AppData\Local\Temp\cckypYwP.s:123    .text.HAL_GetTick:00000018 $d
+C:\Users\yzy\AppData\Local\Temp\cckypYwP.s:129    .text.CPU_TS_Tmr_Delay_US:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\cckypYwP.s:136    .text.CPU_TS_Tmr_Delay_US:00000000 CPU_TS_Tmr_Delay_US
+C:\Users\yzy\AppData\Local\Temp\cckypYwP.s:232    .text.CPU_TS_Tmr_Delay_US:00000044 $d
+
+UNDEFINED SYMBOLS
+HAL_RCC_GetSysClockFreq

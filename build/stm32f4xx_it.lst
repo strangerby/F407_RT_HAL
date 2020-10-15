@@ -1,0 +1,332 @@
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"stm32f4xx_it.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.NMI_Handler,"ax",%progbits
+  16              		.align	1
+  17              		.global	NMI_Handler
+  18              		.arch armv7e-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	NMI_Handler:
+  25              	.LFB130:
+  26              		.file 1 "Applications/stm32f4xx_it.c"
+   1:Applications/stm32f4xx_it.c **** /* USER CODE BEGIN Header */
+   2:Applications/stm32f4xx_it.c **** /**
+   3:Applications/stm32f4xx_it.c ****   ******************************************************************************
+   4:Applications/stm32f4xx_it.c ****   * @file    stm32f4xx_it.c
+   5:Applications/stm32f4xx_it.c ****   * @brief   Interrupt Service Routines.
+   6:Applications/stm32f4xx_it.c ****   ******************************************************************************
+   7:Applications/stm32f4xx_it.c ****   * @attention
+   8:Applications/stm32f4xx_it.c ****   *
+   9:Applications/stm32f4xx_it.c ****   * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
+  10:Applications/stm32f4xx_it.c ****   * All rights reserved.</center></h2>
+  11:Applications/stm32f4xx_it.c ****   *
+  12:Applications/stm32f4xx_it.c ****   * This software component is licensed by ST under Ultimate Liberty license
+  13:Applications/stm32f4xx_it.c ****   * SLA0044, the "License"; You may not use this file except in compliance with
+  14:Applications/stm32f4xx_it.c ****   * the License. You may obtain a copy of the License at:
+  15:Applications/stm32f4xx_it.c ****   *                             www.st.com/SLA0044
+  16:Applications/stm32f4xx_it.c ****   *
+  17:Applications/stm32f4xx_it.c ****   ******************************************************************************
+  18:Applications/stm32f4xx_it.c ****   */
+  19:Applications/stm32f4xx_it.c **** /* USER CODE END Header */
+  20:Applications/stm32f4xx_it.c **** 
+  21:Applications/stm32f4xx_it.c **** /* Includes ------------------------------------------------------------------*/
+  22:Applications/stm32f4xx_it.c **** #include "main.h"
+  23:Applications/stm32f4xx_it.c **** #include "stm32f4xx_it.h"
+  24:Applications/stm32f4xx_it.c **** /* Private includes ----------------------------------------------------------*/
+  25:Applications/stm32f4xx_it.c **** /* USER CODE BEGIN Includes */
+  26:Applications/stm32f4xx_it.c **** /* USER CODE END Includes */
+  27:Applications/stm32f4xx_it.c **** 
+  28:Applications/stm32f4xx_it.c **** /* Private typedef -----------------------------------------------------------*/
+  29:Applications/stm32f4xx_it.c **** /* USER CODE BEGIN TD */
+  30:Applications/stm32f4xx_it.c **** 
+  31:Applications/stm32f4xx_it.c **** /* USER CODE END TD */
+  32:Applications/stm32f4xx_it.c **** 
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s 			page 2
+
+
+  33:Applications/stm32f4xx_it.c **** /* Private define ------------------------------------------------------------*/
+  34:Applications/stm32f4xx_it.c **** /* USER CODE BEGIN PD */
+  35:Applications/stm32f4xx_it.c ****  
+  36:Applications/stm32f4xx_it.c **** /* USER CODE END PD */
+  37:Applications/stm32f4xx_it.c **** 
+  38:Applications/stm32f4xx_it.c **** /* Private macro -------------------------------------------------------------*/
+  39:Applications/stm32f4xx_it.c **** /* USER CODE BEGIN PM */
+  40:Applications/stm32f4xx_it.c **** 
+  41:Applications/stm32f4xx_it.c **** /* USER CODE END PM */
+  42:Applications/stm32f4xx_it.c **** 
+  43:Applications/stm32f4xx_it.c **** /* Private variables ---------------------------------------------------------*/
+  44:Applications/stm32f4xx_it.c **** /* USER CODE BEGIN PV */
+  45:Applications/stm32f4xx_it.c **** 
+  46:Applications/stm32f4xx_it.c **** /* USER CODE END PV */
+  47:Applications/stm32f4xx_it.c **** 
+  48:Applications/stm32f4xx_it.c **** /* Private function prototypes -----------------------------------------------*/
+  49:Applications/stm32f4xx_it.c **** /* USER CODE BEGIN PFP */
+  50:Applications/stm32f4xx_it.c **** 
+  51:Applications/stm32f4xx_it.c **** /* USER CODE END PFP */
+  52:Applications/stm32f4xx_it.c **** 
+  53:Applications/stm32f4xx_it.c **** /* Private user code ---------------------------------------------------------*/
+  54:Applications/stm32f4xx_it.c **** /* USER CODE BEGIN 0 */
+  55:Applications/stm32f4xx_it.c **** 
+  56:Applications/stm32f4xx_it.c **** /* USER CODE END 0 */
+  57:Applications/stm32f4xx_it.c **** 
+  58:Applications/stm32f4xx_it.c **** /* External variables --------------------------------------------------------*/
+  59:Applications/stm32f4xx_it.c **** 
+  60:Applications/stm32f4xx_it.c **** /* USER CODE BEGIN EV */
+  61:Applications/stm32f4xx_it.c **** 
+  62:Applications/stm32f4xx_it.c **** /* USER CODE END EV */
+  63:Applications/stm32f4xx_it.c **** 
+  64:Applications/stm32f4xx_it.c **** /******************************************************************************/
+  65:Applications/stm32f4xx_it.c **** /*           Cortex-M4 Processor Interruption and Exception Handlers          */ 
+  66:Applications/stm32f4xx_it.c **** /******************************************************************************/
+  67:Applications/stm32f4xx_it.c **** /**
+  68:Applications/stm32f4xx_it.c ****   * @brief This function handles Non maskable interrupt.
+  69:Applications/stm32f4xx_it.c ****   */
+  70:Applications/stm32f4xx_it.c **** void NMI_Handler(void)
+  71:Applications/stm32f4xx_it.c **** {
+  27              		.loc 1 71 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  72:Applications/stm32f4xx_it.c ****   /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
+  73:Applications/stm32f4xx_it.c **** 
+  74:Applications/stm32f4xx_it.c ****   /* USER CODE END NonMaskableInt_IRQn 0 */
+  75:Applications/stm32f4xx_it.c ****   /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
+  76:Applications/stm32f4xx_it.c **** 
+  77:Applications/stm32f4xx_it.c ****   /* USER CODE END NonMaskableInt_IRQn 1 */
+  78:Applications/stm32f4xx_it.c **** }
+  32              		.loc 1 78 1 view .LVU1
+  33 0000 7047     		bx	lr
+  34              		.cfi_endproc
+  35              	.LFE130:
+  37              		.section	.text.MemManage_Handler,"ax",%progbits
+  38              		.align	1
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s 			page 3
+
+
+  39              		.global	MemManage_Handler
+  40              		.syntax unified
+  41              		.thumb
+  42              		.thumb_func
+  43              		.fpu softvfp
+  45              	MemManage_Handler:
+  46              	.LFB131:
+  79:Applications/stm32f4xx_it.c **** 
+  80:Applications/stm32f4xx_it.c **** /**
+  81:Applications/stm32f4xx_it.c ****   * @brief This function handles Memory management fault.
+  82:Applications/stm32f4xx_it.c ****   */
+  83:Applications/stm32f4xx_it.c **** void MemManage_Handler(void)
+  84:Applications/stm32f4xx_it.c **** {
+  47              		.loc 1 84 1 view -0
+  48              		.cfi_startproc
+  49              		@ Volatile: function does not return.
+  50              		@ args = 0, pretend = 0, frame = 0
+  51              		@ frame_needed = 0, uses_anonymous_args = 0
+  52              		@ link register save eliminated.
+  53              	.L3:
+  85:Applications/stm32f4xx_it.c ****   /* USER CODE BEGIN MemoryManagement_IRQn 0 */
+  86:Applications/stm32f4xx_it.c **** 
+  87:Applications/stm32f4xx_it.c ****   /* USER CODE END MemoryManagement_IRQn 0 */
+  88:Applications/stm32f4xx_it.c ****   while (1)
+  54              		.loc 1 88 3 discriminator 1 view .LVU3
+  89:Applications/stm32f4xx_it.c ****   {
+  90:Applications/stm32f4xx_it.c ****     /* USER CODE BEGIN W1_MemoryManagement_IRQn 0 */
+  91:Applications/stm32f4xx_it.c ****     /* USER CODE END W1_MemoryManagement_IRQn 0 */
+  92:Applications/stm32f4xx_it.c ****   }
+  55              		.loc 1 92 3 discriminator 1 view .LVU4
+  88:Applications/stm32f4xx_it.c ****   {
+  56              		.loc 1 88 9 discriminator 1 view .LVU5
+  57 0000 FEE7     		b	.L3
+  58              		.cfi_endproc
+  59              	.LFE131:
+  61              		.section	.text.BusFault_Handler,"ax",%progbits
+  62              		.align	1
+  63              		.global	BusFault_Handler
+  64              		.syntax unified
+  65              		.thumb
+  66              		.thumb_func
+  67              		.fpu softvfp
+  69              	BusFault_Handler:
+  70              	.LFB132:
+  93:Applications/stm32f4xx_it.c **** }
+  94:Applications/stm32f4xx_it.c **** 
+  95:Applications/stm32f4xx_it.c **** /**
+  96:Applications/stm32f4xx_it.c ****   * @brief This function handles Pre-fetch fault, memory access fault.
+  97:Applications/stm32f4xx_it.c ****   */
+  98:Applications/stm32f4xx_it.c **** void BusFault_Handler(void)
+  99:Applications/stm32f4xx_it.c **** {
+  71              		.loc 1 99 1 view -0
+  72              		.cfi_startproc
+  73              		@ Volatile: function does not return.
+  74              		@ args = 0, pretend = 0, frame = 0
+  75              		@ frame_needed = 0, uses_anonymous_args = 0
+  76              		@ link register save eliminated.
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s 			page 4
+
+
+  77              	.L5:
+ 100:Applications/stm32f4xx_it.c ****   /* USER CODE BEGIN BusFault_IRQn 0 */
+ 101:Applications/stm32f4xx_it.c **** 
+ 102:Applications/stm32f4xx_it.c ****   /* USER CODE END BusFault_IRQn 0 */
+ 103:Applications/stm32f4xx_it.c ****   while (1)
+  78              		.loc 1 103 3 discriminator 1 view .LVU7
+ 104:Applications/stm32f4xx_it.c ****   {
+ 105:Applications/stm32f4xx_it.c ****     /* USER CODE BEGIN W1_BusFault_IRQn 0 */
+ 106:Applications/stm32f4xx_it.c ****     /* USER CODE END W1_BusFault_IRQn 0 */
+ 107:Applications/stm32f4xx_it.c ****   }
+  79              		.loc 1 107 3 discriminator 1 view .LVU8
+ 103:Applications/stm32f4xx_it.c ****   {
+  80              		.loc 1 103 9 discriminator 1 view .LVU9
+  81 0000 FEE7     		b	.L5
+  82              		.cfi_endproc
+  83              	.LFE132:
+  85              		.section	.text.UsageFault_Handler,"ax",%progbits
+  86              		.align	1
+  87              		.global	UsageFault_Handler
+  88              		.syntax unified
+  89              		.thumb
+  90              		.thumb_func
+  91              		.fpu softvfp
+  93              	UsageFault_Handler:
+  94              	.LFB133:
+ 108:Applications/stm32f4xx_it.c **** }
+ 109:Applications/stm32f4xx_it.c **** 
+ 110:Applications/stm32f4xx_it.c **** /**
+ 111:Applications/stm32f4xx_it.c ****   * @brief This function handles Undefined instruction or illegal state.
+ 112:Applications/stm32f4xx_it.c ****   */
+ 113:Applications/stm32f4xx_it.c **** void UsageFault_Handler(void)
+ 114:Applications/stm32f4xx_it.c **** {
+  95              		.loc 1 114 1 view -0
+  96              		.cfi_startproc
+  97              		@ Volatile: function does not return.
+  98              		@ args = 0, pretend = 0, frame = 0
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100              		@ link register save eliminated.
+ 101              	.L7:
+ 115:Applications/stm32f4xx_it.c ****   /* USER CODE BEGIN UsageFault_IRQn 0 */
+ 116:Applications/stm32f4xx_it.c **** 
+ 117:Applications/stm32f4xx_it.c ****   /* USER CODE END UsageFault_IRQn 0 */
+ 118:Applications/stm32f4xx_it.c ****   while (1)
+ 102              		.loc 1 118 3 discriminator 1 view .LVU11
+ 119:Applications/stm32f4xx_it.c ****   {
+ 120:Applications/stm32f4xx_it.c ****     /* USER CODE BEGIN W1_UsageFault_IRQn 0 */
+ 121:Applications/stm32f4xx_it.c ****     /* USER CODE END W1_UsageFault_IRQn 0 */
+ 122:Applications/stm32f4xx_it.c ****   }
+ 103              		.loc 1 122 3 discriminator 1 view .LVU12
+ 118:Applications/stm32f4xx_it.c ****   {
+ 104              		.loc 1 118 9 discriminator 1 view .LVU13
+ 105 0000 FEE7     		b	.L7
+ 106              		.cfi_endproc
+ 107              	.LFE133:
+ 109              		.section	.text.SVC_Handler,"ax",%progbits
+ 110              		.align	1
+ 111              		.global	SVC_Handler
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s 			page 5
+
+
+ 112              		.syntax unified
+ 113              		.thumb
+ 114              		.thumb_func
+ 115              		.fpu softvfp
+ 117              	SVC_Handler:
+ 118              	.LFB134:
+ 123:Applications/stm32f4xx_it.c **** }
+ 124:Applications/stm32f4xx_it.c **** 
+ 125:Applications/stm32f4xx_it.c **** /**
+ 126:Applications/stm32f4xx_it.c ****   * @brief This function handles System service call via SWI instruction.
+ 127:Applications/stm32f4xx_it.c ****   */
+ 128:Applications/stm32f4xx_it.c **** void SVC_Handler(void)
+ 129:Applications/stm32f4xx_it.c **** {
+ 119              		.loc 1 129 1 view -0
+ 120              		.cfi_startproc
+ 121              		@ args = 0, pretend = 0, frame = 0
+ 122              		@ frame_needed = 0, uses_anonymous_args = 0
+ 123              		@ link register save eliminated.
+ 130:Applications/stm32f4xx_it.c ****   /* USER CODE BEGIN SVCall_IRQn 0 */
+ 131:Applications/stm32f4xx_it.c **** 
+ 132:Applications/stm32f4xx_it.c ****   /* USER CODE END SVCall_IRQn 0 */
+ 133:Applications/stm32f4xx_it.c ****   /* USER CODE BEGIN SVCall_IRQn 1 */
+ 134:Applications/stm32f4xx_it.c **** 
+ 135:Applications/stm32f4xx_it.c ****   /* USER CODE END SVCall_IRQn 1 */
+ 136:Applications/stm32f4xx_it.c **** }
+ 124              		.loc 1 136 1 view .LVU15
+ 125 0000 7047     		bx	lr
+ 126              		.cfi_endproc
+ 127              	.LFE134:
+ 129              		.section	.text.DebugMon_Handler,"ax",%progbits
+ 130              		.align	1
+ 131              		.global	DebugMon_Handler
+ 132              		.syntax unified
+ 133              		.thumb
+ 134              		.thumb_func
+ 135              		.fpu softvfp
+ 137              	DebugMon_Handler:
+ 138              	.LFB135:
+ 137:Applications/stm32f4xx_it.c **** 
+ 138:Applications/stm32f4xx_it.c **** /**
+ 139:Applications/stm32f4xx_it.c ****   * @brief This function handles Debug monitor.
+ 140:Applications/stm32f4xx_it.c ****   */
+ 141:Applications/stm32f4xx_it.c **** void DebugMon_Handler(void)
+ 142:Applications/stm32f4xx_it.c **** {
+ 139              		.loc 1 142 1 view -0
+ 140              		.cfi_startproc
+ 141              		@ args = 0, pretend = 0, frame = 0
+ 142              		@ frame_needed = 0, uses_anonymous_args = 0
+ 143              		@ link register save eliminated.
+ 143:Applications/stm32f4xx_it.c ****   /* USER CODE BEGIN DebugMonitor_IRQn 0 */
+ 144:Applications/stm32f4xx_it.c **** 
+ 145:Applications/stm32f4xx_it.c ****   /* USER CODE END DebugMonitor_IRQn 0 */
+ 146:Applications/stm32f4xx_it.c ****   /* USER CODE BEGIN DebugMonitor_IRQn 1 */
+ 147:Applications/stm32f4xx_it.c **** 
+ 148:Applications/stm32f4xx_it.c ****   /* USER CODE END DebugMonitor_IRQn 1 */
+ 149:Applications/stm32f4xx_it.c **** }
+ 144              		.loc 1 149 1 view .LVU17
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s 			page 6
+
+
+ 145 0000 7047     		bx	lr
+ 146              		.cfi_endproc
+ 147              	.LFE135:
+ 149              		.text
+ 150              	.Letext0:
+ 151              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\2020-q2-update\\arm-none-eabi\\inclu
+ 152              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\2020-q2-update\\arm-none-eabi\\inclu
+ 153              		.file 4 "Libraries/CMSIS/Include/core_cm4.h"
+ 154              		.file 5 "Libraries/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 155              		.file 6 "Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f4xx_it.c
+C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s:16     .text.NMI_Handler:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s:24     .text.NMI_Handler:00000000 NMI_Handler
+C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s:38     .text.MemManage_Handler:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s:45     .text.MemManage_Handler:00000000 MemManage_Handler
+C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s:62     .text.BusFault_Handler:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s:69     .text.BusFault_Handler:00000000 BusFault_Handler
+C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s:86     .text.UsageFault_Handler:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s:93     .text.UsageFault_Handler:00000000 UsageFault_Handler
+C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s:110    .text.SVC_Handler:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s:117    .text.SVC_Handler:00000000 SVC_Handler
+C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s:130    .text.DebugMon_Handler:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccRkrTdC.s:137    .text.DebugMon_Handler:00000000 DebugMon_Handler
+
+NO UNDEFINED SYMBOLS
