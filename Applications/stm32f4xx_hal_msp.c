@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-09-10 16:29:45
+ * @LastEditTime: 2020-10-15 17:35:12
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \F407_RT_HAL\Applications\stm32f4xx_hal_msp.c
+ */
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************

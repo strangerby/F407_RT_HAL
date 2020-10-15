@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccTJAYsP.s 			page 1
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccauEga9.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -15,366 +15,479 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccTJAYsP.s 			page 1
   12              		.text
   13              	.Ltext0:
   14              		.cfi_sections	.debug_frame
-  15              		.section	.text.main,"ax",%progbits
+  15              		.section	.text.led_thread_entry,"ax",%progbits
   16              		.align	1
-  17              		.global	main
-  18              		.arch armv7e-m
-  19              		.syntax unified
-  20              		.thumb
-  21              		.thumb_func
-  22              		.fpu softvfp
-  24              	main:
-  25              	.LFB130:
-  26              		.file 1 "Applications/main.c"
-   1:Applications/main.c **** /* USER CODE BEGIN Header */
-   2:Applications/main.c **** /**
-   3:Applications/main.c ****   ******************************************************************************
-   4:Applications/main.c ****   * @file           : main.c
-   5:Applications/main.c ****   * @brief          : Main program body
-   6:Applications/main.c ****   ******************************************************************************
-   7:Applications/main.c ****   * @attention
-   8:Applications/main.c ****   *
-   9:Applications/main.c ****   * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
-  10:Applications/main.c ****   * All rights reserved.</center></h2>
-  11:Applications/main.c ****   *
-  12:Applications/main.c ****   * This software component is licensed by ST under Ultimate Liberty license
-  13:Applications/main.c ****   * SLA0044, the "License"; You may not use this file except in compliance with
-  14:Applications/main.c ****   * the License. You may obtain a copy of the License at:
-  15:Applications/main.c ****   *                             www.st.com/SLA0044
-  16:Applications/main.c ****   *
-  17:Applications/main.c ****   ******************************************************************************
-  18:Applications/main.c ****   */
-  19:Applications/main.c **** /* USER CODE END Header */
-  20:Applications/main.c **** 
-  21:Applications/main.c **** /* Includes ------------------------------------------------------------------*/
-  22:Applications/main.c **** #include "main.h"
-  23:Applications/main.c **** #include "gpio.h"
-  24:Applications/main.c **** 
-  25:Applications/main.c **** /* Private includes ----------------------------------------------------------*/
-  26:Applications/main.c **** /* USER CODE BEGIN Includes */
+  17              		.arch armv7e-m
+  18              		.syntax unified
+  19              		.thumb
+  20              		.thumb_func
+  21              		.fpu softvfp
+  23              	led_thread_entry:
+  24              	.LFB146:
+  25              		.file 1 "Applications/main.c"
+   1:Applications/main.c **** /*
+   2:Applications/main.c ****  * @Author: your name
+   3:Applications/main.c ****  * @Date: 2020-09-10 16:29:45
+   4:Applications/main.c ****  * @LastEditTime: 2020-10-15 21:27:58
+   5:Applications/main.c ****  * @LastEditors: Please set LastEditors
+   6:Applications/main.c ****  * @Description: In User Settings Edit
+   7:Applications/main.c ****  * @FilePath: \F407_RT_HAL\Applications\main.c
+   8:Applications/main.c ****  */
+   9:Applications/main.c **** #include "main.h"
+  10:Applications/main.c **** #include "gpio.h"
+  11:Applications/main.c **** #include "bsp_led.h"
+  12:Applications/main.c **** #include "rtthread.h"
+  13:Applications/main.c **** 
+  14:Applications/main.c **** static void led_thread_entry(void* parament);
+  15:Applications/main.c **** 
+  16:Applications/main.c **** int main(void)
+  17:Applications/main.c **** {
+  18:Applications/main.c ****     bsp_led_init();
+  19:Applications/main.c ****   //MX_GPIO_Init();
+  20:Applications/main.c ****     HAL_GPIO_WritePin(LED2_PORT, LED2_PIN, GPIO_PIN_RESET);
+  21:Applications/main.c ****     rt_thread_t led_thread = rt_thread_create( "led", led_thread_entry,
+  22:Applications/main.c ****     RT_NULL, 512, 5, 10);
+  23:Applications/main.c ****     if(led_thread != RT_NULL) {
+  24:Applications/main.c ****         rt_thread_startup(led_thread);
+  25:Applications/main.c ****         rt_kprintf("success\n");
+  26:Applications/main.c ****     } else return -1;
   27:Applications/main.c **** 
-  28:Applications/main.c **** /* USER CODE END Includes */
+  28:Applications/main.c ****     return 0; 
+  29:Applications/main.c **** }
+  30:Applications/main.c **** 
+  31:Applications/main.c **** 
+  32:Applications/main.c **** void led_thread_entry(void* parament)
+  33:Applications/main.c **** {
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccauEga9.s 			page 2
+
+
+  26              		.loc 1 33 1 view -0
+  27              		.cfi_startproc
+  28              		@ Volatile: function does not return.
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              	.LVL0:
+  32              		.loc 1 33 1 is_stmt 0 view .LVU1
+  33 0000 08B5     		push	{r3, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 3, -8
+  37              		.cfi_offset 14, -4
+  38              	.LVL1:
+  39              	.L2:
+  34:Applications/main.c ****     while(1) {
+  40              		.loc 1 34 5 is_stmt 1 discriminator 1 view .LVU2
+  35:Applications/main.c ****         bsp_led_toggle(LED3);
+  41              		.loc 1 35 9 discriminator 1 view .LVU3
+  42 0002 0320     		movs	r0, #3
+  43 0004 FFF7FEFF 		bl	bsp_led_toggle
+  44              	.LVL2:
+  36:Applications/main.c ****         rt_thread_mdelay(1000);
+  45              		.loc 1 36 9 discriminator 1 view .LVU4
+  46 0008 4FF47A70 		mov	r0, #1000
+  47 000c FFF7FEFF 		bl	rt_thread_mdelay
+  48              	.LVL3:
+  34:Applications/main.c ****     while(1) {
+  49              		.loc 1 34 10 discriminator 1 view .LVU5
+  50 0010 F7E7     		b	.L2
+  51              		.cfi_endproc
+  52              	.LFE146:
+  54              		.section	.rodata.main.str1.4,"aMS",%progbits,1
+  55              		.align	2
+  56              	.LC0:
+  57 0000 6C656400 		.ascii	"led\000"
+  58              		.align	2
+  59              	.LC1:
+  60 0004 73756363 		.ascii	"success\012\000"
+  60      6573730A 
+  60      00
+  61              		.section	.text.main,"ax",%progbits
+  62              		.align	1
+  63              		.global	main
+  64              		.syntax unified
+  65              		.thumb
+  66              		.thumb_func
+  67              		.fpu softvfp
+  69              	main:
+  70              	.LFB145:
+  17:Applications/main.c ****     bsp_led_init();
+  71              		.loc 1 17 1 view -0
+  72              		.cfi_startproc
+  73              		@ args = 0, pretend = 0, frame = 0
+  74              		@ frame_needed = 0, uses_anonymous_args = 0
+  75 0000 00B5     		push	{lr}
+  76              	.LCFI1:
+  77              		.cfi_def_cfa_offset 4
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccauEga9.s 			page 3
+
+
+  78              		.cfi_offset 14, -4
+  79 0002 83B0     		sub	sp, sp, #12
+  80              	.LCFI2:
+  81              		.cfi_def_cfa_offset 16
+  18:Applications/main.c ****   //MX_GPIO_Init();
+  82              		.loc 1 18 5 view .LVU7
+  83 0004 FFF7FEFF 		bl	bsp_led_init
+  84              	.LVL4:
+  20:Applications/main.c ****     rt_thread_t led_thread = rt_thread_create( "led", led_thread_entry,
+  85              		.loc 1 20 5 view .LVU8
+  86 0008 0022     		movs	r2, #0
+  87 000a 4021     		movs	r1, #64
+  88 000c 0D48     		ldr	r0, .L8
+  89 000e FFF7FEFF 		bl	HAL_GPIO_WritePin
+  90              	.LVL5:
+  21:Applications/main.c ****     RT_NULL, 512, 5, 10);
+  91              		.loc 1 21 5 view .LVU9
+  21:Applications/main.c ****     RT_NULL, 512, 5, 10);
+  92              		.loc 1 21 30 is_stmt 0 view .LVU10
+  93 0012 0A23     		movs	r3, #10
+  94 0014 0193     		str	r3, [sp, #4]
+  95 0016 0523     		movs	r3, #5
+  96 0018 0093     		str	r3, [sp]
+  97 001a 4FF40073 		mov	r3, #512
+  98 001e 0022     		movs	r2, #0
+  99 0020 0949     		ldr	r1, .L8+4
+ 100 0022 0A48     		ldr	r0, .L8+8
+ 101 0024 FFF7FEFF 		bl	rt_thread_create
+ 102              	.LVL6:
+  23:Applications/main.c ****         rt_thread_startup(led_thread);
+ 103              		.loc 1 23 5 is_stmt 1 view .LVU11
+  23:Applications/main.c ****         rt_thread_startup(led_thread);
+ 104              		.loc 1 23 7 is_stmt 0 view .LVU12
+ 105 0028 40B1     		cbz	r0, .L6
+  24:Applications/main.c ****         rt_kprintf("success\n");
+ 106              		.loc 1 24 9 is_stmt 1 view .LVU13
+ 107 002a FFF7FEFF 		bl	rt_thread_startup
+ 108              	.LVL7:
+  25:Applications/main.c ****     } else return -1;
+ 109              		.loc 1 25 9 view .LVU14
+ 110 002e 0848     		ldr	r0, .L8+12
+ 111 0030 FFF7FEFF 		bl	rt_kprintf
+ 112              	.LVL8:
+  28:Applications/main.c **** }
+ 113              		.loc 1 28 5 view .LVU15
+  28:Applications/main.c **** }
+ 114              		.loc 1 28 12 is_stmt 0 view .LVU16
+ 115 0034 0020     		movs	r0, #0
+ 116              	.L4:
   29:Applications/main.c **** 
-  30:Applications/main.c **** /* Private typedef -----------------------------------------------------------*/
-  31:Applications/main.c **** /* USER CODE BEGIN PTD */
-  32:Applications/main.c **** 
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccTJAYsP.s 			page 2
+ 117              		.loc 1 29 1 view .LVU17
+ 118 0036 03B0     		add	sp, sp, #12
+ 119              	.LCFI3:
+ 120              		.cfi_remember_state
+ 121              		.cfi_def_cfa_offset 4
+ 122              		@ sp needed
+ 123 0038 5DF804FB 		ldr	pc, [sp], #4
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccauEga9.s 			page 4
 
 
-  33:Applications/main.c **** /* USER CODE END PTD */
-  34:Applications/main.c **** 
-  35:Applications/main.c **** /* Private define ------------------------------------------------------------*/
-  36:Applications/main.c **** /* USER CODE BEGIN PD */
-  37:Applications/main.c **** /* USER CODE END PD */
+ 124              	.LVL9:
+ 125              	.L6:
+ 126              	.LCFI4:
+ 127              		.cfi_restore_state
+  26:Applications/main.c **** 
+ 128              		.loc 1 26 19 view .LVU18
+ 129 003c 4FF0FF30 		mov	r0, #-1
+ 130              	.LVL10:
+  26:Applications/main.c **** 
+ 131              		.loc 1 26 19 view .LVU19
+ 132 0040 F9E7     		b	.L4
+ 133              	.L9:
+ 134 0042 00BF     		.align	2
+ 135              	.L8:
+ 136 0044 00000240 		.word	1073872896
+ 137 0048 00000000 		.word	led_thread_entry
+ 138 004c 00000000 		.word	.LC0
+ 139 0050 04000000 		.word	.LC1
+ 140              		.cfi_endproc
+ 141              	.LFE145:
+ 143              		.section	.text.SystemClock_Config,"ax",%progbits
+ 144              		.align	1
+ 145              		.global	SystemClock_Config
+ 146              		.syntax unified
+ 147              		.thumb
+ 148              		.thumb_func
+ 149              		.fpu softvfp
+ 151              	SystemClock_Config:
+ 152              	.LFB147:
+  37:Applications/main.c ****     }
   38:Applications/main.c **** 
-  39:Applications/main.c **** /* Private macro -------------------------------------------------------------*/
-  40:Applications/main.c **** /* USER CODE BEGIN PM */
+  39:Applications/main.c **** 
+  40:Applications/main.c **** }
   41:Applications/main.c **** 
-  42:Applications/main.c **** /* USER CODE END PM */
+  42:Applications/main.c **** 
   43:Applications/main.c **** 
-  44:Applications/main.c **** /* Private variables ---------------------------------------------------------*/
+  44:Applications/main.c **** 
   45:Applications/main.c **** 
-  46:Applications/main.c **** /* USER CODE BEGIN PV */
+  46:Applications/main.c **** 
   47:Applications/main.c **** 
-  48:Applications/main.c **** /* USER CODE END PV */
+  48:Applications/main.c **** 
   49:Applications/main.c **** 
-  50:Applications/main.c **** /* Private function prototypes -----------------------------------------------*/
-  51:Applications/main.c **** /* USER CODE BEGIN PFP */
-  52:Applications/main.c **** 
-  53:Applications/main.c **** /* USER CODE END PFP */
-  54:Applications/main.c **** 
-  55:Applications/main.c **** /* Private user code ---------------------------------------------------------*/
-  56:Applications/main.c **** /* USER CODE BEGIN 0 */
-  57:Applications/main.c **** 
-  58:Applications/main.c **** /* USER CODE END 0 */
-  59:Applications/main.c **** 
-  60:Applications/main.c **** /**
-  61:Applications/main.c ****   * @brief  The application entry point.
-  62:Applications/main.c ****   * @retval int
-  63:Applications/main.c ****   */
-  64:Applications/main.c **** int main(void)
-  65:Applications/main.c **** {
-  27              		.loc 1 65 1 view -0
-  28              		.cfi_startproc
-  29              		@ Volatile: function does not return.
-  30              		@ args = 0, pretend = 0, frame = 0
-  31              		@ frame_needed = 0, uses_anonymous_args = 0
-  32              		@ link register save eliminated.
-  33              	.L2:
-  66:Applications/main.c **** 
-  67:Applications/main.c ****   //MX_GPIO_Init();
-  68:Applications/main.c ****   while (1) {
-  34              		.loc 1 68 3 discriminator 1 view .LVU1
-  69:Applications/main.c **** 
-  70:Applications/main.c ****   }
-  35              		.loc 1 70 3 discriminator 1 view .LVU2
-  68:Applications/main.c **** 
-  36              		.loc 1 68 9 discriminator 1 view .LVU3
-  37 0000 FEE7     		b	.L2
-  38              		.cfi_endproc
-  39              	.LFE130:
-  41              		.section	.text.SystemClock_Config,"ax",%progbits
-  42              		.align	1
-  43              		.global	SystemClock_Config
-  44              		.syntax unified
-  45              		.thumb
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccTJAYsP.s 			page 3
+  50:Applications/main.c **** 
+  51:Applications/main.c **** 
+  52:Applications/main.c **** /**
+  53:Applications/main.c ****   * @brief System Clock Configuration
+  54:Applications/main.c ****   * @retval None
+  55:Applications/main.c ****   */
+  56:Applications/main.c **** void SystemClock_Config(void)
+  57:Applications/main.c **** {
+ 153              		.loc 1 57 1 is_stmt 1 view -0
+ 154              		.cfi_startproc
+ 155              		@ args = 0, pretend = 0, frame = 80
+ 156              		@ frame_needed = 0, uses_anonymous_args = 0
+ 157 0000 30B5     		push	{r4, r5, lr}
+ 158              	.LCFI5:
+ 159              		.cfi_def_cfa_offset 12
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccauEga9.s 			page 5
 
 
-  46              		.thumb_func
-  47              		.fpu softvfp
-  49              	SystemClock_Config:
-  50              	.LFB131:
-  71:Applications/main.c **** }
-  72:Applications/main.c **** 
-  73:Applications/main.c **** /**
-  74:Applications/main.c ****   * @brief System Clock Configuration
-  75:Applications/main.c ****   * @retval None
-  76:Applications/main.c ****   */
-  77:Applications/main.c **** void SystemClock_Config(void)
-  78:Applications/main.c **** {
-  51              		.loc 1 78 1 view -0
-  52              		.cfi_startproc
-  53              		@ args = 0, pretend = 0, frame = 80
-  54              		@ frame_needed = 0, uses_anonymous_args = 0
-  55 0000 30B5     		push	{r4, r5, lr}
-  56              	.LCFI0:
-  57              		.cfi_def_cfa_offset 12
-  58              		.cfi_offset 4, -12
-  59              		.cfi_offset 5, -8
-  60              		.cfi_offset 14, -4
-  61 0002 95B0     		sub	sp, sp, #84
-  62              	.LCFI1:
-  63              		.cfi_def_cfa_offset 96
-  79:Applications/main.c ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-  64              		.loc 1 79 3 view .LVU5
-  65              		.loc 1 79 22 is_stmt 0 view .LVU6
-  66 0004 3022     		movs	r2, #48
-  67 0006 0021     		movs	r1, #0
-  68 0008 08A8     		add	r0, sp, #32
-  69 000a FFF7FEFF 		bl	memset
-  70              	.LVL0:
-  80:Applications/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-  71              		.loc 1 80 3 is_stmt 1 view .LVU7
-  72              		.loc 1 80 22 is_stmt 0 view .LVU8
-  73 000e 0024     		movs	r4, #0
-  74 0010 0394     		str	r4, [sp, #12]
-  75 0012 0494     		str	r4, [sp, #16]
-  76 0014 0594     		str	r4, [sp, #20]
-  77 0016 0694     		str	r4, [sp, #24]
-  78 0018 0794     		str	r4, [sp, #28]
-  81:Applications/main.c **** 
-  82:Applications/main.c ****   /** Configure the main internal regulator output voltage 
-  83:Applications/main.c ****   */
-  84:Applications/main.c ****   __HAL_RCC_PWR_CLK_ENABLE();
-  79              		.loc 1 84 3 is_stmt 1 view .LVU9
-  80              	.LBB2:
-  81              		.loc 1 84 3 view .LVU10
-  82 001a 0194     		str	r4, [sp, #4]
-  83              		.loc 1 84 3 view .LVU11
-  84 001c 1C4B     		ldr	r3, .L5
-  85 001e 1A6C     		ldr	r2, [r3, #64]
-  86 0020 42F08052 		orr	r2, r2, #268435456
-  87 0024 1A64     		str	r2, [r3, #64]
-  88              		.loc 1 84 3 view .LVU12
-  89 0026 1B6C     		ldr	r3, [r3, #64]
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccTJAYsP.s 			page 4
+ 160              		.cfi_offset 4, -12
+ 161              		.cfi_offset 5, -8
+ 162              		.cfi_offset 14, -4
+ 163 0002 95B0     		sub	sp, sp, #84
+ 164              	.LCFI6:
+ 165              		.cfi_def_cfa_offset 96
+  58:Applications/main.c ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+ 166              		.loc 1 58 3 view .LVU21
+ 167              		.loc 1 58 22 is_stmt 0 view .LVU22
+ 168 0004 3022     		movs	r2, #48
+ 169 0006 0021     		movs	r1, #0
+ 170 0008 08A8     		add	r0, sp, #32
+ 171 000a FFF7FEFF 		bl	memset
+ 172              	.LVL11:
+  59:Applications/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 173              		.loc 1 59 3 is_stmt 1 view .LVU23
+ 174              		.loc 1 59 22 is_stmt 0 view .LVU24
+ 175 000e 0024     		movs	r4, #0
+ 176 0010 0394     		str	r4, [sp, #12]
+ 177 0012 0494     		str	r4, [sp, #16]
+ 178 0014 0594     		str	r4, [sp, #20]
+ 179 0016 0694     		str	r4, [sp, #24]
+ 180 0018 0794     		str	r4, [sp, #28]
+  60:Applications/main.c **** 
+  61:Applications/main.c ****   /** Configure the main internal regulator output voltage 
+  62:Applications/main.c ****   */
+  63:Applications/main.c ****   __HAL_RCC_PWR_CLK_ENABLE();
+ 181              		.loc 1 63 3 is_stmt 1 view .LVU25
+ 182              	.LBB2:
+ 183              		.loc 1 63 3 view .LVU26
+ 184 001a 0194     		str	r4, [sp, #4]
+ 185              		.loc 1 63 3 view .LVU27
+ 186 001c 1C4B     		ldr	r3, .L12
+ 187 001e 1A6C     		ldr	r2, [r3, #64]
+ 188 0020 42F08052 		orr	r2, r2, #268435456
+ 189 0024 1A64     		str	r2, [r3, #64]
+ 190              		.loc 1 63 3 view .LVU28
+ 191 0026 1B6C     		ldr	r3, [r3, #64]
+ 192 0028 03F08053 		and	r3, r3, #268435456
+ 193 002c 0193     		str	r3, [sp, #4]
+ 194              		.loc 1 63 3 view .LVU29
+ 195 002e 019B     		ldr	r3, [sp, #4]
+ 196              	.LBE2:
+ 197              		.loc 1 63 3 view .LVU30
+  64:Applications/main.c ****   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+ 198              		.loc 1 64 3 view .LVU31
+ 199              	.LBB3:
+ 200              		.loc 1 64 3 view .LVU32
+ 201 0030 0294     		str	r4, [sp, #8]
+ 202              		.loc 1 64 3 view .LVU33
+ 203 0032 184B     		ldr	r3, .L12+4
+ 204 0034 1A68     		ldr	r2, [r3]
+ 205 0036 42F48042 		orr	r2, r2, #16384
+ 206 003a 1A60     		str	r2, [r3]
+ 207              		.loc 1 64 3 view .LVU34
+ 208 003c 1B68     		ldr	r3, [r3]
+ 209 003e 03F48043 		and	r3, r3, #16384
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccauEga9.s 			page 6
 
 
-  90 0028 03F08053 		and	r3, r3, #268435456
-  91 002c 0193     		str	r3, [sp, #4]
-  92              		.loc 1 84 3 view .LVU13
-  93 002e 019B     		ldr	r3, [sp, #4]
-  94              	.LBE2:
-  95              		.loc 1 84 3 view .LVU14
-  85:Applications/main.c ****   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-  96              		.loc 1 85 3 view .LVU15
-  97              	.LBB3:
-  98              		.loc 1 85 3 view .LVU16
-  99 0030 0294     		str	r4, [sp, #8]
- 100              		.loc 1 85 3 view .LVU17
- 101 0032 184B     		ldr	r3, .L5+4
- 102 0034 1A68     		ldr	r2, [r3]
- 103 0036 42F48042 		orr	r2, r2, #16384
- 104 003a 1A60     		str	r2, [r3]
- 105              		.loc 1 85 3 view .LVU18
- 106 003c 1B68     		ldr	r3, [r3]
- 107 003e 03F48043 		and	r3, r3, #16384
- 108 0042 0293     		str	r3, [sp, #8]
- 109              		.loc 1 85 3 view .LVU19
- 110 0044 029B     		ldr	r3, [sp, #8]
- 111              	.LBE3:
- 112              		.loc 1 85 3 view .LVU20
-  86:Applications/main.c ****   /** Initializes the CPU, AHB and APB busses clocks 
-  87:Applications/main.c ****   */
-  88:Applications/main.c ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
- 113              		.loc 1 88 3 view .LVU21
- 114              		.loc 1 88 36 is_stmt 0 view .LVU22
- 115 0046 0123     		movs	r3, #1
- 116 0048 0893     		str	r3, [sp, #32]
-  89:Applications/main.c ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
- 117              		.loc 1 89 3 is_stmt 1 view .LVU23
- 118              		.loc 1 89 30 is_stmt 0 view .LVU24
- 119 004a 4FF48033 		mov	r3, #65536
- 120 004e 0993     		str	r3, [sp, #36]
-  90:Applications/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
- 121              		.loc 1 90 3 is_stmt 1 view .LVU25
- 122              		.loc 1 90 34 is_stmt 0 view .LVU26
- 123 0050 0225     		movs	r5, #2
- 124 0052 0E95     		str	r5, [sp, #56]
-  91:Applications/main.c ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
- 125              		.loc 1 91 3 is_stmt 1 view .LVU27
- 126              		.loc 1 91 35 is_stmt 0 view .LVU28
- 127 0054 4FF48003 		mov	r3, #4194304
- 128 0058 0F93     		str	r3, [sp, #60]
-  92:Applications/main.c ****   RCC_OscInitStruct.PLL.PLLM = 8;
- 129              		.loc 1 92 3 is_stmt 1 view .LVU29
- 130              		.loc 1 92 30 is_stmt 0 view .LVU30
- 131 005a 0823     		movs	r3, #8
- 132 005c 1093     		str	r3, [sp, #64]
-  93:Applications/main.c ****   RCC_OscInitStruct.PLL.PLLN = 336;
- 133              		.loc 1 93 3 is_stmt 1 view .LVU31
- 134              		.loc 1 93 30 is_stmt 0 view .LVU32
- 135 005e 4FF4A873 		mov	r3, #336
- 136 0062 1193     		str	r3, [sp, #68]
-  94:Applications/main.c ****   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccTJAYsP.s 			page 5
+ 210 0042 0293     		str	r3, [sp, #8]
+ 211              		.loc 1 64 3 view .LVU35
+ 212 0044 029B     		ldr	r3, [sp, #8]
+ 213              	.LBE3:
+ 214              		.loc 1 64 3 view .LVU36
+  65:Applications/main.c ****   /** Initializes the CPU, AHB and APB busses clocks 
+  66:Applications/main.c ****   */
+  67:Applications/main.c ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+ 215              		.loc 1 67 3 view .LVU37
+ 216              		.loc 1 67 36 is_stmt 0 view .LVU38
+ 217 0046 0123     		movs	r3, #1
+ 218 0048 0893     		str	r3, [sp, #32]
+  68:Applications/main.c ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+ 219              		.loc 1 68 3 is_stmt 1 view .LVU39
+ 220              		.loc 1 68 30 is_stmt 0 view .LVU40
+ 221 004a 4FF48033 		mov	r3, #65536
+ 222 004e 0993     		str	r3, [sp, #36]
+  69:Applications/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 223              		.loc 1 69 3 is_stmt 1 view .LVU41
+ 224              		.loc 1 69 34 is_stmt 0 view .LVU42
+ 225 0050 0225     		movs	r5, #2
+ 226 0052 0E95     		str	r5, [sp, #56]
+  70:Applications/main.c ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+ 227              		.loc 1 70 3 is_stmt 1 view .LVU43
+ 228              		.loc 1 70 35 is_stmt 0 view .LVU44
+ 229 0054 4FF48003 		mov	r3, #4194304
+ 230 0058 0F93     		str	r3, [sp, #60]
+  71:Applications/main.c ****   RCC_OscInitStruct.PLL.PLLM = 8;
+ 231              		.loc 1 71 3 is_stmt 1 view .LVU45
+ 232              		.loc 1 71 30 is_stmt 0 view .LVU46
+ 233 005a 0823     		movs	r3, #8
+ 234 005c 1093     		str	r3, [sp, #64]
+  72:Applications/main.c ****   RCC_OscInitStruct.PLL.PLLN = 336;
+ 235              		.loc 1 72 3 is_stmt 1 view .LVU47
+ 236              		.loc 1 72 30 is_stmt 0 view .LVU48
+ 237 005e 4FF4A873 		mov	r3, #336
+ 238 0062 1193     		str	r3, [sp, #68]
+  73:Applications/main.c ****   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+ 239              		.loc 1 73 3 is_stmt 1 view .LVU49
+ 240              		.loc 1 73 30 is_stmt 0 view .LVU50
+ 241 0064 1295     		str	r5, [sp, #72]
+  74:Applications/main.c ****   RCC_OscInitStruct.PLL.PLLQ = 4;
+ 242              		.loc 1 74 3 is_stmt 1 view .LVU51
+ 243              		.loc 1 74 30 is_stmt 0 view .LVU52
+ 244 0066 0423     		movs	r3, #4
+ 245 0068 1393     		str	r3, [sp, #76]
+  75:Applications/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 246              		.loc 1 75 3 is_stmt 1 view .LVU53
+ 247              		.loc 1 75 7 is_stmt 0 view .LVU54
+ 248 006a 08A8     		add	r0, sp, #32
+ 249 006c FFF7FEFF 		bl	HAL_RCC_OscConfig
+ 250              	.LVL12:
+  76:Applications/main.c ****   {
+  77:Applications/main.c ****     Error_Handler();
+  78:Applications/main.c ****   }
+  79:Applications/main.c ****   /** Initializes the CPU, AHB and APB busses clocks 
+  80:Applications/main.c ****   */
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccauEga9.s 			page 7
 
 
- 137              		.loc 1 94 3 is_stmt 1 view .LVU33
- 138              		.loc 1 94 30 is_stmt 0 view .LVU34
- 139 0064 1295     		str	r5, [sp, #72]
-  95:Applications/main.c ****   RCC_OscInitStruct.PLL.PLLQ = 4;
- 140              		.loc 1 95 3 is_stmt 1 view .LVU35
- 141              		.loc 1 95 30 is_stmt 0 view .LVU36
- 142 0066 0423     		movs	r3, #4
- 143 0068 1393     		str	r3, [sp, #76]
-  96:Applications/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
- 144              		.loc 1 96 3 is_stmt 1 view .LVU37
- 145              		.loc 1 96 7 is_stmt 0 view .LVU38
- 146 006a 08A8     		add	r0, sp, #32
- 147 006c FFF7FEFF 		bl	HAL_RCC_OscConfig
- 148              	.LVL1:
-  97:Applications/main.c ****   {
-  98:Applications/main.c ****     Error_Handler();
-  99:Applications/main.c ****   }
- 100:Applications/main.c ****   /** Initializes the CPU, AHB and APB busses clocks 
+  81:Applications/main.c ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+ 251              		.loc 1 81 3 is_stmt 1 view .LVU55
+ 252              		.loc 1 81 31 is_stmt 0 view .LVU56
+ 253 0070 0F23     		movs	r3, #15
+ 254 0072 0393     		str	r3, [sp, #12]
+  82:Applications/main.c ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  83:Applications/main.c ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+ 255              		.loc 1 83 3 is_stmt 1 view .LVU57
+ 256              		.loc 1 83 34 is_stmt 0 view .LVU58
+ 257 0074 0495     		str	r5, [sp, #16]
+  84:Applications/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 258              		.loc 1 84 3 is_stmt 1 view .LVU59
+ 259              		.loc 1 84 35 is_stmt 0 view .LVU60
+ 260 0076 0594     		str	r4, [sp, #20]
+  85:Applications/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+ 261              		.loc 1 85 3 is_stmt 1 view .LVU61
+ 262              		.loc 1 85 36 is_stmt 0 view .LVU62
+ 263 0078 4FF4A053 		mov	r3, #5120
+ 264 007c 0693     		str	r3, [sp, #24]
+  86:Applications/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+ 265              		.loc 1 86 3 is_stmt 1 view .LVU63
+ 266              		.loc 1 86 36 is_stmt 0 view .LVU64
+ 267 007e 4FF48053 		mov	r3, #4096
+ 268 0082 0793     		str	r3, [sp, #28]
+  87:Applications/main.c **** 
+  88:Applications/main.c ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
+ 269              		.loc 1 88 3 is_stmt 1 view .LVU65
+ 270              		.loc 1 88 7 is_stmt 0 view .LVU66
+ 271 0084 0521     		movs	r1, #5
+ 272 0086 03A8     		add	r0, sp, #12
+ 273 0088 FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 274              	.LVL13:
+  89:Applications/main.c ****   {
+  90:Applications/main.c ****     Error_Handler();
+  91:Applications/main.c ****   }
+  92:Applications/main.c **** }
+ 275              		.loc 1 92 1 view .LVU67
+ 276 008c 15B0     		add	sp, sp, #84
+ 277              	.LCFI7:
+ 278              		.cfi_def_cfa_offset 12
+ 279              		@ sp needed
+ 280 008e 30BD     		pop	{r4, r5, pc}
+ 281              	.L13:
+ 282              		.align	2
+ 283              	.L12:
+ 284 0090 00380240 		.word	1073887232
+ 285 0094 00700040 		.word	1073770496
+ 286              		.cfi_endproc
+ 287              	.LFE147:
+ 289              		.section	.text.Error_Handler,"ax",%progbits
+ 290              		.align	1
+ 291              		.global	Error_Handler
+ 292              		.syntax unified
+ 293              		.thumb
+ 294              		.thumb_func
+ 295              		.fpu softvfp
+ 297              	Error_Handler:
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccauEga9.s 			page 8
+
+
+ 298              	.LFB148:
+  93:Applications/main.c **** 
+  94:Applications/main.c **** /* USER CODE BEGIN 4 */
+  95:Applications/main.c **** 
+  96:Applications/main.c **** /* USER CODE END 4 */
+  97:Applications/main.c **** 
+  98:Applications/main.c **** /**
+  99:Applications/main.c ****   * @brief  This function is executed in case of error occurrence.
+ 100:Applications/main.c ****   * @retval None
  101:Applications/main.c ****   */
- 102:Applications/main.c ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
- 149              		.loc 1 102 3 is_stmt 1 view .LVU39
- 150              		.loc 1 102 31 is_stmt 0 view .LVU40
- 151 0070 0F23     		movs	r3, #15
- 152 0072 0393     		str	r3, [sp, #12]
- 103:Applications/main.c ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
- 104:Applications/main.c ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
- 153              		.loc 1 104 3 is_stmt 1 view .LVU41
- 154              		.loc 1 104 34 is_stmt 0 view .LVU42
- 155 0074 0495     		str	r5, [sp, #16]
- 105:Applications/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
- 156              		.loc 1 105 3 is_stmt 1 view .LVU43
- 157              		.loc 1 105 35 is_stmt 0 view .LVU44
- 158 0076 0594     		str	r4, [sp, #20]
- 106:Applications/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
- 159              		.loc 1 106 3 is_stmt 1 view .LVU45
- 160              		.loc 1 106 36 is_stmt 0 view .LVU46
- 161 0078 4FF4A053 		mov	r3, #5120
- 162 007c 0693     		str	r3, [sp, #24]
- 107:Applications/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
- 163              		.loc 1 107 3 is_stmt 1 view .LVU47
- 164              		.loc 1 107 36 is_stmt 0 view .LVU48
- 165 007e 4FF48053 		mov	r3, #4096
- 166 0082 0793     		str	r3, [sp, #28]
- 108:Applications/main.c **** 
- 109:Applications/main.c ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
- 167              		.loc 1 109 3 is_stmt 1 view .LVU49
- 168              		.loc 1 109 7 is_stmt 0 view .LVU50
- 169 0084 0521     		movs	r1, #5
- 170 0086 03A8     		add	r0, sp, #12
- 171 0088 FFF7FEFF 		bl	HAL_RCC_ClockConfig
- 172              	.LVL2:
- 110:Applications/main.c ****   {
- 111:Applications/main.c ****     Error_Handler();
- 112:Applications/main.c ****   }
- 113:Applications/main.c **** }
- 173              		.loc 1 113 1 view .LVU51
- 174 008c 15B0     		add	sp, sp, #84
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccTJAYsP.s 			page 6
-
-
- 175              	.LCFI2:
- 176              		.cfi_def_cfa_offset 12
- 177              		@ sp needed
- 178 008e 30BD     		pop	{r4, r5, pc}
- 179              	.L6:
- 180              		.align	2
- 181              	.L5:
- 182 0090 00380240 		.word	1073887232
- 183 0094 00700040 		.word	1073770496
- 184              		.cfi_endproc
- 185              	.LFE131:
- 187              		.section	.text.Error_Handler,"ax",%progbits
- 188              		.align	1
- 189              		.global	Error_Handler
- 190              		.syntax unified
- 191              		.thumb
- 192              		.thumb_func
- 193              		.fpu softvfp
- 195              	Error_Handler:
- 196              	.LFB132:
- 114:Applications/main.c **** 
- 115:Applications/main.c **** /* USER CODE BEGIN 4 */
- 116:Applications/main.c **** 
- 117:Applications/main.c **** /* USER CODE END 4 */
- 118:Applications/main.c **** 
- 119:Applications/main.c **** /**
- 120:Applications/main.c ****   * @brief  This function is executed in case of error occurrence.
- 121:Applications/main.c ****   * @retval None
- 122:Applications/main.c ****   */
- 123:Applications/main.c **** void Error_Handler(void)
- 124:Applications/main.c **** {
- 197              		.loc 1 124 1 is_stmt 1 view -0
- 198              		.cfi_startproc
- 199              		@ args = 0, pretend = 0, frame = 0
- 200              		@ frame_needed = 0, uses_anonymous_args = 0
- 201              		@ link register save eliminated.
- 125:Applications/main.c ****   /* USER CODE BEGIN Error_Handler_Debug */
- 126:Applications/main.c ****   /* User can add his own implementation to report the HAL error return state */
- 127:Applications/main.c **** 
- 128:Applications/main.c ****   /* USER CODE END Error_Handler_Debug */
- 129:Applications/main.c **** }
- 202              		.loc 1 129 1 view .LVU53
- 203 0000 7047     		bx	lr
- 204              		.cfi_endproc
- 205              	.LFE132:
- 207              		.text
- 208              	.Letext0:
- 209              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\2020-q2-update\\arm-none-eabi\\inclu
- 210              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\2020-q2-update\\arm-none-eabi\\inclu
- 211              		.file 4 "Libraries/CMSIS/Include/core_cm4.h"
- 212              		.file 5 "Libraries/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
- 213              		.file 6 "Libraries/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
- 214              		.file 7 "Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h"
- 215              		.file 8 "Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h"
- 216              		.file 9 "Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
- 217              		.file 10 "Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
- 218              		.file 11 "<built-in>"
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccTJAYsP.s 			page 7
-
-
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccTJAYsP.s 			page 8
+ 102:Applications/main.c **** void Error_Handler(void)
+ 103:Applications/main.c **** {
+ 299              		.loc 1 103 1 is_stmt 1 view -0
+ 300              		.cfi_startproc
+ 301              		@ args = 0, pretend = 0, frame = 0
+ 302              		@ frame_needed = 0, uses_anonymous_args = 0
+ 303              		@ link register save eliminated.
+ 104:Applications/main.c ****   /* USER CODE BEGIN Error_Handler_Debug */
+ 105:Applications/main.c ****   /* User can add his own implementation to report the HAL error return state */
+ 106:Applications/main.c **** 
+ 107:Applications/main.c ****   /* USER CODE END Error_Handler_Debug */
+ 108:Applications/main.c **** }
+ 304              		.loc 1 108 1 view .LVU69
+ 305 0000 7047     		bx	lr
+ 306              		.cfi_endproc
+ 307              	.LFE148:
+ 309              		.text
+ 310              	.Letext0:
+ 311              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\2020-q2-update\\arm-none-eabi\\inclu
+ 312              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\2020-q2-update\\arm-none-eabi\\inclu
+ 313              		.file 4 "Libraries/CMSIS/Include/core_cm4.h"
+ 314              		.file 5 "Libraries/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 315              		.file 6 "Libraries/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
+ 316              		.file 7 "Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h"
+ 317              		.file 8 "Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h"
+ 318              		.file 9 "Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 319              		.file 10 "Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 320              		.file 11 "Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ 321              		.file 12 "RT-Thread/include/rtdef.h"
+ 322              		.file 13 "derivers/bsp_led/bsp_led.h"
+ 323              		.file 14 "RT-Thread/include/rtthread.h"
+ 324              		.file 15 "<built-in>"
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccauEga9.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\yzy\AppData\Local\Temp\ccTJAYsP.s:16     .text.main:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\ccTJAYsP.s:24     .text.main:00000000 main
-C:\Users\yzy\AppData\Local\Temp\ccTJAYsP.s:42     .text.SystemClock_Config:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\ccTJAYsP.s:49     .text.SystemClock_Config:00000000 SystemClock_Config
-C:\Users\yzy\AppData\Local\Temp\ccTJAYsP.s:182    .text.SystemClock_Config:00000090 $d
-C:\Users\yzy\AppData\Local\Temp\ccTJAYsP.s:188    .text.Error_Handler:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\ccTJAYsP.s:195    .text.Error_Handler:00000000 Error_Handler
+C:\Users\yzy\AppData\Local\Temp\ccauEga9.s:16     .text.led_thread_entry:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccauEga9.s:23     .text.led_thread_entry:00000000 led_thread_entry
+C:\Users\yzy\AppData\Local\Temp\ccauEga9.s:55     .rodata.main.str1.4:00000000 $d
+C:\Users\yzy\AppData\Local\Temp\ccauEga9.s:62     .text.main:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccauEga9.s:69     .text.main:00000000 main
+C:\Users\yzy\AppData\Local\Temp\ccauEga9.s:136    .text.main:00000044 $d
+C:\Users\yzy\AppData\Local\Temp\ccauEga9.s:144    .text.SystemClock_Config:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccauEga9.s:151    .text.SystemClock_Config:00000000 SystemClock_Config
+C:\Users\yzy\AppData\Local\Temp\ccauEga9.s:284    .text.SystemClock_Config:00000090 $d
+C:\Users\yzy\AppData\Local\Temp\ccauEga9.s:290    .text.Error_Handler:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccauEga9.s:297    .text.Error_Handler:00000000 Error_Handler
 
 UNDEFINED SYMBOLS
+bsp_led_toggle
+rt_thread_mdelay
+bsp_led_init
+HAL_GPIO_WritePin
+rt_thread_create
+rt_thread_startup
+rt_kprintf
 memset
 HAL_RCC_OscConfig
 HAL_RCC_ClockConfig

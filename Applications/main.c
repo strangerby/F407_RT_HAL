@@ -1,74 +1,53 @@
-/* USER CODE BEGIN Header */
-/**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
-  *
-  ******************************************************************************
-  */
-/* USER CODE END Header */
-
-/* Includes ------------------------------------------------------------------*/
+/*
+ * @Author: your name
+ * @Date: 2020-09-10 16:29:45
+ * @LastEditTime: 2020-10-15 21:27:58
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \F407_RT_HAL\Applications\main.c
+ */
 #include "main.h"
 #include "gpio.h"
+#include "bsp_led.h"
+#include "rtthread.h"
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
+static void led_thread_entry(void* parament);
 
-/* USER CODE END Includes */
-
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
-
-/* Private variables ---------------------------------------------------------*/
-
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
-
-/* Private function prototypes -----------------------------------------------*/
-/* USER CODE BEGIN PFP */
-
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
-
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
 int main(void)
 {
-
+    bsp_led_init();
   //MX_GPIO_Init();
-  while (1) {
+    HAL_GPIO_WritePin(LED2_PORT, LED2_PIN, GPIO_PIN_RESET);
+    rt_thread_t led_thread = rt_thread_create( "led", led_thread_entry,
+    RT_NULL, 512, 5, 10);
+    if(led_thread != RT_NULL) {
+        rt_thread_startup(led_thread);
+        rt_kprintf("success\n");
+    } else return -1;
 
-  }
+    return 0; 
 }
+
+
+void led_thread_entry(void* parament)
+{
+    while(1) {
+        bsp_led_toggle(LED3);
+        rt_thread_mdelay(1000);
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
 
 /**
   * @brief System Clock Configuration

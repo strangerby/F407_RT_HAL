@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-15 16:02:27
- * @LastEditTime: 2020-10-15 16:30:07
+ * @LastEditTime: 2020-10-15 17:38:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \F407_RT_HAL\derivers\uart1\bsp_uart1.c

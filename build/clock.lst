@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s 			page 1
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s 			page 1
   30:RT-Thread/src/clock.c **** {
   27              		.loc 1 30 1 view -0
   28              		.cfi_startproc
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s 			page 2
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s 			page 2
 
 
   29              		@ args = 0, pretend = 0, frame = 0
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s 			page 1
   68              		.thumb
   69              		.thumb_func
   70              		.fpu softvfp
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s 			page 3
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s 			page 3
 
 
   72              	rt_tick_set:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s 			page 1
  114              		.thumb_func
  115              		.fpu softvfp
  117              	rt_tick_increase:
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s 			page 4
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s 			page 4
 
 
  118              	.LFB18:
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s 			page 1
   85:RT-Thread/src/clock.c ****     }
   86:RT-Thread/src/clock.c **** 
   87:RT-Thread/src/clock.c ****     /* check timer */
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s 			page 5
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s 			page 5
 
 
   88:RT-Thread/src/clock.c ****     rt_timer_check();
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s 			page 1
  185              		.cfi_startproc
  186              		@ args = 0, pretend = 0, frame = 0
  187              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s 			page 6
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s 			page 6
 
 
  188              		@ link register save eliminated.
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s 			page 1
  116:RT-Thread/src/clock.c ****     return tick;
  228              		.loc 1 116 5 is_stmt 1 view .LVU48
  117:RT-Thread/src/clock.c **** }
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s 			page 7
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s 			page 7
 
 
  229              		.loc 1 117 1 is_stmt 0 view .LVU49
@@ -379,27 +379,27 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s 			page 1
  247              		.file 2 "RT-Thread/include/rtdef.h"
  248              		.file 3 "RT-Thread/include/rtthread.h"
  249              		.file 4 "RT-Thread/include/rthw.h"
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s 			page 8
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s 			page 8
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 clock.c
-C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s:16     .text.rt_system_tick_init:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s:24     .text.rt_system_tick_init:00000000 rt_system_tick_init
-C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s:38     .text.rt_tick_get:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s:45     .text.rt_tick_get:00000000 rt_tick_get
-C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s:60     .text.rt_tick_get:00000008 $d
-C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s:65     .text.rt_tick_set:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s:72     .text.rt_tick_set:00000000 rt_tick_set
-C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s:105    .text.rt_tick_set:00000014 $d
-C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s:110    .text.rt_tick_increase:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s:117    .text.rt_tick_increase:00000000 rt_tick_increase
-C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s:169    .text.rt_tick_increase:00000028 $d
-C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s:174    .text.rt_tick_from_millisecond:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s:181    .text.rt_tick_from_millisecond:00000000 rt_tick_from_millisecond
-C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s:234    .text.rt_tick_from_millisecond:00000038 $d
-C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s:239    .bss.rt_tick:00000000 $d
-C:\Users\yzy\AppData\Local\Temp\ccY14x7j.s:243    .bss.rt_tick:00000000 rt_tick
+C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s:16     .text.rt_system_tick_init:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s:24     .text.rt_system_tick_init:00000000 rt_system_tick_init
+C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s:38     .text.rt_tick_get:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s:45     .text.rt_tick_get:00000000 rt_tick_get
+C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s:60     .text.rt_tick_get:00000008 $d
+C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s:65     .text.rt_tick_set:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s:72     .text.rt_tick_set:00000000 rt_tick_set
+C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s:105    .text.rt_tick_set:00000014 $d
+C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s:110    .text.rt_tick_increase:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s:117    .text.rt_tick_increase:00000000 rt_tick_increase
+C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s:169    .text.rt_tick_increase:00000028 $d
+C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s:174    .text.rt_tick_from_millisecond:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s:181    .text.rt_tick_from_millisecond:00000000 rt_tick_from_millisecond
+C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s:234    .text.rt_tick_from_millisecond:00000038 $d
+C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s:239    .bss.rt_tick:00000000 $d
+C:\Users\yzy\AppData\Local\Temp\ccjN9aso.s:243    .bss.rt_tick:00000000 rt_tick
 
 UNDEFINED SYMBOLS
 rt_hw_interrupt_disable

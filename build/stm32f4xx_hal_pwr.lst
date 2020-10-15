@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
   30:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****   */
   31:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c **** 
   32:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c **** /** @defgroup PWR PWR
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 2
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 2
 
 
   33:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****   * @brief PWR HAL module driver
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
   87:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c **** 
   88:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c **** /**
   89:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****   * @brief Deinitializes the HAL PWR peripheral registers to their default reset values.
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 3
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 3
 
 
   90:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****   * @retval None
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
   65              		.loc 1 107 3 view .LVU5
   66              		.loc 1 107 32 is_stmt 0 view .LVU6
   67 0000 014B     		ldr	r3, .L5
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 4
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 4
 
 
   68 0002 0122     		movs	r2, #1
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  112              		.thumb
  113              		.thumb_func
  114              		.fpu softvfp
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 5
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 5
 
 
  116              	HAL_PWR_ConfigPVD:
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  172:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****       
  173:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****       -@@- The Regulator parameter is not used for the STM32F4 family 
  174:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****               and is kept as parameter just to maintain compatibility with the 
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 6
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 6
 
 
  175:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****               lower power families (STM32L).
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  229:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****         (++) To wake up from the Stop mode with an RTC alarm event, it is necessary to 
  230:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****               configure the RTC to generate the RTC alarm using the HAL_RTC_SetAlarm_IT() function.
  231:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c **** 
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 7
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 7
 
 
  232:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****         (++) To wake up from the Stop mode with an RTC Tamper or time stamp event, it 
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  141 001e 1A60     		str	r2, [r3]
  264:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****   __HAL_PWR_PVD_EXTI_DISABLE_RISING_EDGE();
  142              		.loc 1 264 3 view .LVU18
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 8
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 8
 
 
  143 0020 9A68     		ldr	r2, [r3, #8]
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  282:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****     __HAL_PWR_PVD_EXTI_ENABLE_RISING_EDGE();
  180              		.loc 1 282 5 is_stmt 1 view .LVU31
  181 005c 084A     		ldr	r2, .L15+4
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 9
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 9
 
 
  182 005e 9368     		ldr	r3, [r2, #8]
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  223              		.loc 1 297 3 view .LVU38
  224              		.loc 1 297 33 is_stmt 0 view .LVU39
  225 0000 014B     		ldr	r3, .L18
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 10
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 10
 
 
  226 0002 0122     		movs	r2, #1
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  274              	HAL_PWR_EnableWakeUpPin:
  275              	.LVL1:
  276              	.LFB136:
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 11
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 11
 
 
  308:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c **** 
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  333:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****   *           @arg PWR_WAKEUP_PIN3 available only on STM32F410xx/STM32F412xx/STM32F413xx/STM32F423x
  334:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****   * @retval None
  335:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****   */
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 12
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 12
 
 
  336:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c **** void HAL_PWR_DisableWakeUpPin(uint32_t WakeUpPinx)
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  361:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****   *            @arg PWR_SLEEPENTRY_WFI: enter SLEEP mode with WFI instruction
  362:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****   *            @arg PWR_SLEEPENTRY_WFE: enter SLEEP mode with WFE instruction
  363:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****   * @retval None
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 13
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 13
 
 
  364:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****   */
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  369              		.thumb
  370              		.syntax unified
  371 0014 7047     		bx	lr
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 14
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 14
 
 
  372              	.L32:
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  411:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****   assert_param(IS_PWR_REGULATOR(Regulator));
  404              		.loc 1 411 3 view .LVU65
  412:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****   assert_param(IS_PWR_STOP_ENTRY(STOPEntry));
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 15
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 15
 
 
  405              		.loc 1 412 3 view .LVU66
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  437              		.loc 1 434 3 view .LVU74
  438 0020 044A     		ldr	r2, .L39+4
  439 0022 1369     		ldr	r3, [r2, #16]
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 16
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 16
 
 
  440 0024 23F00403 		bic	r3, r3, #4
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  479 0004 43F00203 		orr	r3, r3, #2
  480 0008 1360     		str	r3, [r2]
  451:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c **** 
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 17
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 17
 
 
  452:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****   /* Set SLEEPDEEP bit of Cortex System Control Register */
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  476:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****     /* Clear PWR Exti pending bit */
  477:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****     __HAL_PWR_PVD_EXTI_CLEAR_FLAG();
  478:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****   }
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 18
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 18
 
 
  479:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c **** }
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  552              	.L48:
  474:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****     
  553              		.loc 1 474 5 is_stmt 1 view .LVU89
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 19
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 19
 
 
  554 000e FFF7FEFF 		bl	HAL_PWR_PVDCallback
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  594 000c 00ED00E0 		.word	-536810240
  595              		.cfi_endproc
  596              	.LFE143:
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 20
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 20
 
 
  598              		.section	.text.HAL_PWR_DisableSleepOnExit,"ax",%progbits
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  523:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c ****   */
  524:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c **** void HAL_PWR_EnableSEVOnPend(void)
  525:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c **** {
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 21
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 21
 
 
  637              		.loc 1 525 1 is_stmt 1 view -0
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  678              	.L62:
  679              		.align	2
  680              	.L61:
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 22
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 22
 
 
  681 000c 00ED00E0 		.word	-536810240
@@ -1274,60 +1274,60 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 1
  692              		.file 7 "Libraries/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h"
  693              		.file 8 "Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h"
  694              		.file 9 "Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s 			page 23
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s 			page 23
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_hal_pwr.c
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:16     .text.HAL_PWR_DeInit:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:24     .text.HAL_PWR_DeInit:00000000 HAL_PWR_DeInit
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:46     .text.HAL_PWR_DeInit:00000014 $d
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:51     .text.HAL_PWR_EnableBkUpAccess:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:58     .text.HAL_PWR_EnableBkUpAccess:00000000 HAL_PWR_EnableBkUpAccess
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:75     .text.HAL_PWR_EnableBkUpAccess:00000008 $d
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:80     .text.HAL_PWR_DisableBkUpAccess:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:87     .text.HAL_PWR_DisableBkUpAccess:00000000 HAL_PWR_DisableBkUpAccess
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:104    .text.HAL_PWR_DisableBkUpAccess:00000008 $d
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:109    .text.HAL_PWR_ConfigPVD:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:116    .text.HAL_PWR_ConfigPVD:00000000 HAL_PWR_ConfigPVD
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:203    .text.HAL_PWR_ConfigPVD:0000007c $d
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:209    .text.HAL_PWR_EnablePVD:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:216    .text.HAL_PWR_EnablePVD:00000000 HAL_PWR_EnablePVD
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:233    .text.HAL_PWR_EnablePVD:00000008 $d
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:238    .text.HAL_PWR_DisablePVD:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:245    .text.HAL_PWR_DisablePVD:00000000 HAL_PWR_DisablePVD
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:262    .text.HAL_PWR_DisablePVD:00000008 $d
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:267    .text.HAL_PWR_EnableWakeUpPin:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:274    .text.HAL_PWR_EnableWakeUpPin:00000000 HAL_PWR_EnableWakeUpPin
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:293    .text.HAL_PWR_EnableWakeUpPin:0000000c $d
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:298    .text.HAL_PWR_DisableWakeUpPin:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:305    .text.HAL_PWR_DisableWakeUpPin:00000000 HAL_PWR_DisableWakeUpPin
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:324    .text.HAL_PWR_DisableWakeUpPin:0000000c $d
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:329    .text.HAL_PWR_EnterSLEEPMode:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:336    .text.HAL_PWR_EnterSLEEPMode:00000000 HAL_PWR_EnterSLEEPMode
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:384    .text.HAL_PWR_EnterSLEEPMode:0000001c $d
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:389    .text.HAL_PWR_EnterSTOPMode:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:396    .text.HAL_PWR_EnterSTOPMode:00000000 HAL_PWR_EnterSTOPMode
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:456    .text.HAL_PWR_EnterSTOPMode:00000030 $d
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:462    .text.HAL_PWR_EnterSTANDBYMode:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:469    .text.HAL_PWR_EnterSTANDBYMode:00000000 HAL_PWR_EnterSTANDBYMode
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:498    .text.HAL_PWR_EnterSTANDBYMode:00000018 $d
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:504    .text.HAL_PWR_PVDCallback:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:511    .text.HAL_PWR_PVDCallback:00000000 HAL_PWR_PVDCallback
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:524    .text.HAL_PWR_PVD_IRQHandler:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:531    .text.HAL_PWR_PVD_IRQHandler:00000000 HAL_PWR_PVD_IRQHandler
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:565    .text.HAL_PWR_PVD_IRQHandler:0000001c $d
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:570    .text.HAL_PWR_EnableSleepOnExit:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:577    .text.HAL_PWR_EnableSleepOnExit:00000000 HAL_PWR_EnableSleepOnExit
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:594    .text.HAL_PWR_EnableSleepOnExit:0000000c $d
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:599    .text.HAL_PWR_DisableSleepOnExit:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:606    .text.HAL_PWR_DisableSleepOnExit:00000000 HAL_PWR_DisableSleepOnExit
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:623    .text.HAL_PWR_DisableSleepOnExit:0000000c $d
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:628    .text.HAL_PWR_EnableSEVOnPend:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:635    .text.HAL_PWR_EnableSEVOnPend:00000000 HAL_PWR_EnableSEVOnPend
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:652    .text.HAL_PWR_EnableSEVOnPend:0000000c $d
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:657    .text.HAL_PWR_DisableSEVOnPend:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:664    .text.HAL_PWR_DisableSEVOnPend:00000000 HAL_PWR_DisableSEVOnPend
-C:\Users\yzy\AppData\Local\Temp\cco2Q14w.s:681    .text.HAL_PWR_DisableSEVOnPend:0000000c $d
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:16     .text.HAL_PWR_DeInit:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:24     .text.HAL_PWR_DeInit:00000000 HAL_PWR_DeInit
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:46     .text.HAL_PWR_DeInit:00000014 $d
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:51     .text.HAL_PWR_EnableBkUpAccess:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:58     .text.HAL_PWR_EnableBkUpAccess:00000000 HAL_PWR_EnableBkUpAccess
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:75     .text.HAL_PWR_EnableBkUpAccess:00000008 $d
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:80     .text.HAL_PWR_DisableBkUpAccess:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:87     .text.HAL_PWR_DisableBkUpAccess:00000000 HAL_PWR_DisableBkUpAccess
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:104    .text.HAL_PWR_DisableBkUpAccess:00000008 $d
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:109    .text.HAL_PWR_ConfigPVD:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:116    .text.HAL_PWR_ConfigPVD:00000000 HAL_PWR_ConfigPVD
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:203    .text.HAL_PWR_ConfigPVD:0000007c $d
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:209    .text.HAL_PWR_EnablePVD:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:216    .text.HAL_PWR_EnablePVD:00000000 HAL_PWR_EnablePVD
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:233    .text.HAL_PWR_EnablePVD:00000008 $d
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:238    .text.HAL_PWR_DisablePVD:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:245    .text.HAL_PWR_DisablePVD:00000000 HAL_PWR_DisablePVD
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:262    .text.HAL_PWR_DisablePVD:00000008 $d
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:267    .text.HAL_PWR_EnableWakeUpPin:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:274    .text.HAL_PWR_EnableWakeUpPin:00000000 HAL_PWR_EnableWakeUpPin
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:293    .text.HAL_PWR_EnableWakeUpPin:0000000c $d
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:298    .text.HAL_PWR_DisableWakeUpPin:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:305    .text.HAL_PWR_DisableWakeUpPin:00000000 HAL_PWR_DisableWakeUpPin
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:324    .text.HAL_PWR_DisableWakeUpPin:0000000c $d
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:329    .text.HAL_PWR_EnterSLEEPMode:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:336    .text.HAL_PWR_EnterSLEEPMode:00000000 HAL_PWR_EnterSLEEPMode
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:384    .text.HAL_PWR_EnterSLEEPMode:0000001c $d
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:389    .text.HAL_PWR_EnterSTOPMode:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:396    .text.HAL_PWR_EnterSTOPMode:00000000 HAL_PWR_EnterSTOPMode
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:456    .text.HAL_PWR_EnterSTOPMode:00000030 $d
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:462    .text.HAL_PWR_EnterSTANDBYMode:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:469    .text.HAL_PWR_EnterSTANDBYMode:00000000 HAL_PWR_EnterSTANDBYMode
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:498    .text.HAL_PWR_EnterSTANDBYMode:00000018 $d
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:504    .text.HAL_PWR_PVDCallback:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:511    .text.HAL_PWR_PVDCallback:00000000 HAL_PWR_PVDCallback
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:524    .text.HAL_PWR_PVD_IRQHandler:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:531    .text.HAL_PWR_PVD_IRQHandler:00000000 HAL_PWR_PVD_IRQHandler
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:565    .text.HAL_PWR_PVD_IRQHandler:0000001c $d
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:570    .text.HAL_PWR_EnableSleepOnExit:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:577    .text.HAL_PWR_EnableSleepOnExit:00000000 HAL_PWR_EnableSleepOnExit
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:594    .text.HAL_PWR_EnableSleepOnExit:0000000c $d
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:599    .text.HAL_PWR_DisableSleepOnExit:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:606    .text.HAL_PWR_DisableSleepOnExit:00000000 HAL_PWR_DisableSleepOnExit
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:623    .text.HAL_PWR_DisableSleepOnExit:0000000c $d
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:628    .text.HAL_PWR_EnableSEVOnPend:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:635    .text.HAL_PWR_EnableSEVOnPend:00000000 HAL_PWR_EnableSEVOnPend
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:652    .text.HAL_PWR_EnableSEVOnPend:0000000c $d
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:657    .text.HAL_PWR_DisableSEVOnPend:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:664    .text.HAL_PWR_DisableSEVOnPend:00000000 HAL_PWR_DisableSEVOnPend
+C:\Users\yzy\AppData\Local\Temp\ccLVSzUA.s:681    .text.HAL_PWR_DisableSEVOnPend:0000000c $d
 
 NO UNDEFINED SYMBOLS

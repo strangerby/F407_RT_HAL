@@ -1,4 +1,5 @@
-build/main.o: Applications/main.c Applications/include/main.h \
+build/bsp_led.o: derivers/bsp_led/bsp_led.c derivers/bsp_led/bsp_led.h \
+ Applications/include/main.h \
  Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  Applications/include/stm32f4xx_hal_conf.h \
  Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -74,11 +75,9 @@ build/main.o: Applications/main.c Applications/include/main.h \
  Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spdifrx.h \
  Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dfsdm.h \
  Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_lptim.h \
- RT-Thread/bsp/core_delay.h Applications/include/gpio.h \
- Applications/include/main.h derivers/bsp_led/bsp_led.h \
- RT-Thread/include/rtthread.h Applications/include/rtconfig.h \
- RT-Thread/include/rtdebug.h RT-Thread/include/rtdef.h \
- RT-Thread/include/rtservice.h RT-Thread/include/rtm.h
+ RT-Thread/bsp/core_delay.h
+
+derivers/bsp_led/bsp_led.h:
 
 Applications/include/main.h:
 
@@ -235,21 +234,3 @@ Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dfsdm.h:
 Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_lptim.h:
 
 RT-Thread/bsp/core_delay.h:
-
-Applications/include/gpio.h:
-
-Applications/include/main.h:
-
-derivers/bsp_led/bsp_led.h:
-
-RT-Thread/include/rtthread.h:
-
-Applications/include/rtconfig.h:
-
-RT-Thread/include/rtdebug.h:
-
-RT-Thread/include/rtdef.h:
-
-RT-Thread/include/rtservice.h:
-
-RT-Thread/include/rtm.h:

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
   30:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****              (+++) Configure the priority and enable the NVIC for the transfer complete
   31:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****                  interrupt on the two DMA Streams. The output stream should have higher
   32:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****                  priority than the input stream.
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 2
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 2
 
 
   33:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****      (#) Configure the ADC Prescaler, conversion resolution and data alignment
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
   87:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** #include "stm32f4xx_hal.h"
   88:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** 
   89:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** /** @addtogroup STM32F4xx_HAL_Driver
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 3
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 3
 
 
   90:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   * @{
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  144:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   *         the configuration information for the specified ADC.
  145:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   * @retval HAL status
  146:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   */
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 4
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 4
 
 
  147:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** HAL_StatusTypeDef HAL_ADCEx_InjectedStart(ADC_HandleTypeDef* hadc)
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  201:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     __HAL_ADC_CLEAR_FLAG(hadc, ADC_FLAG_JEOC);
  202:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** 
  203:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     /* Pointer to the common control register to which is belonging hadc    */
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 5
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 5
 
 
  204:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     /* (Depending on STM32F4 product, there may be up to 3 ADC and 1 common */
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  258:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     __HAL_ADC_ENABLE(hadc);
  259:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     
  260:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     /* Delay for ADC stabilization time */
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 6
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 6
 
 
  261:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     /* Compute number of CPU cycles to wait for */
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  315:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****       }
  316:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     }
  317:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     else
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 7
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 7
 
 
  318:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     {
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  372:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****       ADC_STATE_CLR_SET(hadc->State,
  373:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****                         HAL_ADC_STATE_REG_BUSY | HAL_ADC_STATE_INJ_BUSY,
  374:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****                         HAL_ADC_STATE_READY);
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 8
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 8
 
 
  375:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     }
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  429:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   /* by external trigger, continuous mode or scan sequence on going.          */
  430:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   /* Note: On STM32F4, there is no independent flag of end of sequence.       */
  431:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   /*       The test of scan sequence on going is done either with scan        */
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 9
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 9
 
 
  432:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   /*       sequence disabled or with end of conversion flag set to            */
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  486:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     /* Disable ADC peripheral */
  487:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     __HAL_ADC_DISABLE(hadc);
  488:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 10
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 10
 
 
  489:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     /* Check if ADC is effectively disabled */
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  543:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     {
  544:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****       tmp =  hadc->Instance->JDR4;
  545:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     }  
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 11
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 11
 
 
  546:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     break;
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  600:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     /* Compute number of CPU cycles to wait for */
  601:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     counter = (ADC_STAB_DELAY_US * (SystemCoreClock / 1000000U));
  602:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     while(counter != 0U)
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 12
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 12
 
 
  603:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     {
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  657:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** 
  658:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     /* Enable ADC overrun interrupt */
  659:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     __HAL_ADC_ENABLE_IT(hadc, ADC_IT_OVR);
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 13
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 13
 
 
  660:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** 
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  714:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   /* (Depending on STM32F4 product, there may be up to 3 ADC and 1 common */
  715:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   /* control register)                                                    */
  716:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   tmpADC_Common = ADC_COMMON_REGISTER(hadc);
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 14
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 14
 
 
  717:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** 
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  771:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** {
  772:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   /* Prevent unused argument(s) compilation warning */
  773:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   UNUSED(hadc);
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 15
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 15
 
 
  774:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   /* NOTE : This function Should not be modified, when the callback is needed,
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  828:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   else /* ADC_Channel include in ADC_Channel_[0..9] */
  829:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   {
  830:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     /* Clear the old sample time */
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 16
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 16
 
 
  831:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     hadc->Instance->SMPR2 &= ~ADC_SMPR2(ADC_SMPR2_SMP0, sConfigInjected->InjectedChannel);
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  885:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     hadc->Instance->CR1 |= ADC_CR1_JDISCEN;
  886:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   }
  887:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   else
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 17
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 17
 
 
  888:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   {
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  942:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** 
  943:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** /**
  944:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   * @brief  Configures the ADC multi-mode 
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 18
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 18
 
 
  945:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   * @param  hadc       pointer to a ADC_HandleTypeDef structure that contains
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  999:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** {
 1000:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   /* Retrieve ADC handle corresponding to current DMA handle */
 1001:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   ADC_HandleTypeDef* hadc = ( ADC_HandleTypeDef* )((DMA_HandleTypeDef* )hdma)->Parent;
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 19
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 19
 
 
 1002:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
 1056:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** }
 1057:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** 
 1058:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** /**
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 20
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 20
 
 
 1059:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   * @brief  DMA error callback 
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
   69              		.cfi_startproc
   70              		@ args = 0, pretend = 0, frame = 0
   71              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 21
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 21
 
 
 1052:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     ADC_HandleTypeDef* hadc = ( ADC_HandleTypeDef* )((DMA_HandleTypeDef* )hdma)->Parent;
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  117 0004 1A6C     		ldr	r2, [r3, #64]
 1004:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   {
  118              		.loc 1 1004 6 view .LVU22
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 22
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 22
 
 
  119 0006 12F0500F 		tst	r2, #80
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  158              		.loc 1 1029 10 view .LVU37
  159 0044 12F4805F 		tst	r2, #4096
  160 0048 03D1     		bne	.L7
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 23
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 23
 
 
 1031:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****       }
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  148:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   __IO uint32_t counter = 0U;
  207              		.loc 1 148 1 is_stmt 0 view .LVU48
  208 0000 82B0     		sub	sp, sp, #8
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 24
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 24
 
 
  209              	.LCFI3:
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  247 0032 03EB4303 		add	r3, r3, r3, lsl #1
  167:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     while(counter != 0U)
  248              		.loc 1 167 13 view .LVU65
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 25
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 25
 
 
  249 0036 0193     		str	r3, [sp, #4]
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  288 006a 4364     		str	r3, [r0, #68]
  289              	.L16:
  197:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 26
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 26
 
 
  290              		.loc 1 197 5 view .LVU81
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  327              		.loc 1 216 29 view .LVU98
  328 0096 43F48003 		orr	r3, r3, #4194304
  329 009a 9360     		str	r3, [r2, #8]
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 27
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 27
 
 
  232:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** }
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  369 00c2 9A60     		str	r2, [r3, #8]
  232:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** }
  370              		.loc 1 232 10 view .LVU114
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 28
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 28
 
 
  371 00c4 0020     		movs	r0, #0
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  416 00e0 F5E7     		b	.L12
  417              	.L28:
  418 00e2 00BF     		.align	2
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 29
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 29
 
 
  419              	.L27:
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  255:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   {  
  464              		.loc 1 255 11 is_stmt 0 discriminator 2 view .LVU135
  465 0014 0368     		ldr	r3, [r0]
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 30
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 30
 
 
  255:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   {  
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  504              		.loc 1 270 6 is_stmt 0 view .LVU151
  505 0046 0268     		ldr	r2, [r0]
  506 0048 9368     		ldr	r3, [r2, #8]
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 31
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 31
 
 
  270:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   {
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  546 0086 13F01F0F 		tst	r3, #31
  547 008a 0ED1     		bne	.L35
  309:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****       tmp2 = HAL_IS_BIT_CLR(hadc->Instance->CR1, ADC_CR1_JAUTO);
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 32
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 32
 
 
  548              		.loc 1 309 7 is_stmt 1 view .LVU167
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  587 00b4 01F48061 		and	r1, r1, #1024
  588              	.LVL44:
  321:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****       {
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 33
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 33
 
 
  589              		.loc 1 321 7 is_stmt 1 view .LVU183
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  630              		.cfi_remember_state
  631              		.cfi_def_cfa_offset 0
  632              		@ sp needed
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 34
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 34
 
 
  633 00da 7047     		bx	lr
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  683              		@ link register save eliminated.
  346:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   HAL_StatusTypeDef tmp_hal_status = HAL_OK;
  684              		.loc 1 346 1 is_stmt 0 view .LVU203
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 35
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 35
 
 
  685 0000 0346     		mov	r3, r0
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  723 0036 22F48852 		bic	r2, r2, #4352
  724 003a 22F00102 		bic	r2, r2, #1
  725 003e 42F00102 		orr	r2, r2, #1
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 36
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 36
 
 
  726 0042 0264     		str	r2, [r0, #64]
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  766              		.cfi_endproc
  767              	.LFE132:
  769              		.section	.text.HAL_ADCEx_InjectedPollForConversion,"ax",%progbits
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 37
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 37
 
 
  770              		.align	1
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  813              		.loc 1 410 7 is_stmt 0 view .LVU245
  814 0016 B5F1FF3F 		cmp	r5, #-1
  815 001a F7D0     		beq	.L55
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 38
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 38
 
 
  412:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****       {
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  853              		.loc 1 434 5 view .LVU262
  854 0048 12F4401F 		tst	r2, #3145728
  855 004c 1ED1     		bne	.L60
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 39
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 39
 
 
  435:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****       HAL_IS_BIT_CLR(hadc->Instance->CR2, ADC_CR2_EOCS)    ) &&
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  895 008a 00E0     		b	.L57
  896              	.L60:
  451:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** }      
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 40
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 40
 
 
  897              		.loc 1 451 10 is_stmt 0 view .LVU278
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  944 0006 012A     		cmp	r2, #1
  945 0008 2DD0     		beq	.L71
  474:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 41
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 41
 
 
  946              		.loc 1 474 3 discriminator 2 view .LVU288
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  986              		.loc 1 468 21 view .LVU302
  987 004e 04E0     		b	.L70
  988              	.LVL75:
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 42
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 42
 
 
  989              	.L69:
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  1033              	HAL_ADCEx_InjectedGetValue:
  1034              	.LVL82:
  1035              	.LFB135:
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 43
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 43
 
 
  529:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   __IO uint32_t tmp = 0U;
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  565:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** }
  1077              		.loc 1 565 3 view .LVU328
  565:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** }
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 44
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 44
 
 
  1078              		.loc 1 565 10 is_stmt 0 view .LVU329
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  1117              		.loc 1 559 11 view .LVU344
  1118 003c 0193     		str	r3, [sp, #4]
  561:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     default:
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 45
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 45
 
 
  1119              		.loc 1 561 5 is_stmt 1 view .LVU345
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  1164 0010 71D0     		beq	.L91
  1165 0012 0546     		mov	r5, r0
  590:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 46
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 46
 
 
  1166              		.loc 1 590 3 discriminator 2 view .LVU357
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  602:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     {
  1205              		.loc 1 602 19 is_stmt 0 view .LVU373
  1206 0046 0198     		ldr	r0, [sp, #4]
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 47
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 47
 
 
  602:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     {
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  1247              		.loc 1 640 5 view .LVU387
  640:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     
  1248              		.loc 1 640 5 view .LVU388
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 48
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 48
 
 
  1249 008a 0022     		movs	r2, #0
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  1286              		.loc 1 669 7 is_stmt 1 view .LVU405
  669:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     }
  1287              		.loc 1 669 26 is_stmt 0 view .LVU406
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 49
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 49
 
 
  1288 00ba 1748     		ldr	r0, .L95+20
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  1330 00f2 4260     		str	r2, [r0, #4]
  1331 00f4 E6E7     		b	.L90
  1332              	.LVL94:
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 50
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 50
 
 
  1333              	.L91:
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  1383              		.loc 1 699 1 is_stmt 1 view -0
  1384              		.cfi_startproc
  1385              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 51
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 51
 
 
  1386              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  738:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   
  1425              		.loc 1 738 3 view .LVU440
  1426 0028 0023     		movs	r3, #0
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 52
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 52
 
 
  1427 002a 84F83C30 		strb	r3, [r4, #60]
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  1469 005e 7047     		bx	lr
  1470              	.L108:
  1471              		.align	2
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 53
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 53
 
 
  1472              	.L107:
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  1523              		@ frame_needed = 0, uses_anonymous_args = 0
  1524              		@ link register save eliminated.
  773:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   /* NOTE : This function Should not be modified, when the callback is needed,
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 54
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 54
 
 
  1525              		.loc 1 773 3 view .LVU460
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  1566              		.cfi_offset 4, -8
  1567              		.cfi_offset 5, -4
  817:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 55
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 55
 
 
  1568              		.loc 1 817 3 is_stmt 1 discriminator 2 view .LVU476
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  1607              		.loc 1 838 3 is_stmt 1 view .LVU491
  838:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   hadc->Instance->JSQR |=  ADC_SQR1(sConfigInjected->InjectedNbrOfConversion);
  1608              		.loc 1 838 7 is_stmt 0 view .LVU492
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 56
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 56
 
 
  1609 0046 0268     		ldr	r2, [r0]
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  1648              		.loc 1 847 27 view .LVU507
  1649 0082 4B68     		ldr	r3, [r1, #4]
  1650 0084 0C69     		ldr	r4, [r1, #16]
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 57
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 57
 
 
  1651 0086 1B1B     		subs	r3, r3, r4
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  1690 00bc 23F44013 		bic	r3, r3, #3145728
  1691 00c0 9360     		str	r3, [r2, #8]
  862:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   }
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 58
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 58
 
 
  1692              		.loc 1 862 5 is_stmt 1 view .LVU523
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  1730              	.L122:
  893:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   {
  1731              		.loc 1 893 3 is_stmt 1 view .LVU540
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 59
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 59
 
 
  893:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   {
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  1771 0120 04FA03F3 		lsl	r3, r4, r3
  831:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****     
  1772              		.loc 1 831 27 view .LVU556
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 60
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 60
 
 
  1773 0124 22EA0303 		bic	r3, r2, r3
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  1813 0160 BCE7     		b	.L120
  1814              	.L121:
  890:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   }
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 61
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 61
 
 
  1815              		.loc 1 890 5 is_stmt 1 view .LVU571
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  930:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   {
  1854              		.loc 1 930 3 is_stmt 1 view .LVU587
  930:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   {
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 62
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 62
 
 
  1855              		.loc 1 930 12 is_stmt 0 view .LVU588
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  903:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****       break;
  1896              		.loc 1 903 47 view .LVU602
  1897 01b4 CC68     		ldr	r4, [r1, #12]
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 63
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 63
 
 
  903:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****       break;
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  1937 01e6 D2E7     		b	.L127
  1938              	.L136:
  930:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   {
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 64
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 64
 
 
  1939              		.loc 1 930 52 discriminator 1 view .LVU618
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  1988              		@ link register save eliminated.
  954:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** 
  1989              		.loc 1 954 3 view .LVU626
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 65
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 65
 
 
  957:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   assert_param(IS_ADC_DMA_ACCESS_MODE(multimode->DMAAccessMode));
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  2027 0028 5A60     		str	r2, [r3, #4]
  975:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   
  2028              		.loc 1 975 3 is_stmt 1 discriminator 2 view .LVU644
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 66
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 66
 
 
  975:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c ****   
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  2067              		.loc 1 962 3 view .LVU660
  2068 004e 0220     		movs	r0, #2
  2069              	.LVL122:
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 67
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 67
 
 
  986:Libraries/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c **** 
@@ -3983,50 +3983,50 @@ ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 1
  2089              		.file 10 "Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h"
  2090              		.file 11 "Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h"
  2091              		.file 12 "Libraries/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
-ARM GAS  C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s 			page 68
+ARM GAS  C:\Users\yzy\AppData\Local\Temp\ccN466ht.s 			page 68
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_hal_adc_ex.c
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:16     .text.ADC_MultiModeDMAError:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:23     .text.ADC_MultiModeDMAError:00000000 ADC_MultiModeDMAError
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:59     .text.ADC_MultiModeDMAHalfConvCplt:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:65     .text.ADC_MultiModeDMAHalfConvCplt:00000000 ADC_MultiModeDMAHalfConvCplt
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:92     .text.ADC_MultiModeDMAConvCplt:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:98     .text.ADC_MultiModeDMAConvCplt:00000000 ADC_MultiModeDMAConvCplt
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:192    .text.HAL_ADCEx_InjectedStart:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:199    .text.HAL_ADCEx_InjectedStart:00000000 HAL_ADCEx_InjectedStart
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:420    .text.HAL_ADCEx_InjectedStart:000000e4 $d
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:428    .text.HAL_ADCEx_InjectedStart_IT:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:435    .text.HAL_ADCEx_InjectedStart_IT:00000000 HAL_ADCEx_InjectedStart_IT
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:661    .text.HAL_ADCEx_InjectedStart_IT:000000ec $d
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:669    .text.HAL_ADCEx_InjectedStop:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:676    .text.HAL_ADCEx_InjectedStop:00000000 HAL_ADCEx_InjectedStop
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:770    .text.HAL_ADCEx_InjectedPollForConversion:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:777    .text.HAL_ADCEx_InjectedPollForConversion:00000000 HAL_ADCEx_InjectedPollForConversion
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:921    .text.HAL_ADCEx_InjectedStop_IT:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:928    .text.HAL_ADCEx_InjectedStop_IT:00000000 HAL_ADCEx_InjectedStop_IT
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1026   .text.HAL_ADCEx_InjectedGetValue:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1033   .text.HAL_ADCEx_InjectedGetValue:00000000 HAL_ADCEx_InjectedGetValue
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1062   .text.HAL_ADCEx_InjectedGetValue:00000018 $d
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1066   .text.HAL_ADCEx_InjectedGetValue:0000001c $t
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1125   .text.HAL_ADCEx_MultiModeStart_DMA:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1132   .text.HAL_ADCEx_MultiModeStart_DMA:00000000 HAL_ADCEx_MultiModeStart_DMA
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1362   .text.HAL_ADCEx_MultiModeStart_DMA:00000104 $d
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1373   .text.HAL_ADCEx_MultiModeStop_DMA:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1380   .text.HAL_ADCEx_MultiModeStop_DMA:00000000 HAL_ADCEx_MultiModeStop_DMA
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1473   .text.HAL_ADCEx_MultiModeStop_DMA:00000060 $d
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1478   .text.HAL_ADCEx_MultiModeGetValue:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1485   .text.HAL_ADCEx_MultiModeGetValue:00000000 HAL_ADCEx_MultiModeGetValue
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1505   .text.HAL_ADCEx_MultiModeGetValue:00000008 $d
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1510   .text.HAL_ADCEx_InjectedConvCpltCallback:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1517   .text.HAL_ADCEx_InjectedConvCpltCallback:00000000 HAL_ADCEx_InjectedConvCpltCallback
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1532   .text.HAL_ADCEx_InjectedConfigChannel:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1539   .text.HAL_ADCEx_InjectedConfigChannel:00000000 HAL_ADCEx_InjectedConfigChannel
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1967   .text.HAL_ADCEx_InjectedConfigChannel:00000200 $d
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1974   .text.HAL_ADCEx_MultiModeConfigChannel:00000000 $t
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:1981   .text.HAL_ADCEx_MultiModeConfigChannel:00000000 HAL_ADCEx_MultiModeConfigChannel
-C:\Users\yzy\AppData\Local\Temp\cc4NQXf2.s:2075   .text.HAL_ADCEx_MultiModeConfigChannel:00000054 $d
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:16     .text.ADC_MultiModeDMAError:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:23     .text.ADC_MultiModeDMAError:00000000 ADC_MultiModeDMAError
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:59     .text.ADC_MultiModeDMAHalfConvCplt:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:65     .text.ADC_MultiModeDMAHalfConvCplt:00000000 ADC_MultiModeDMAHalfConvCplt
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:92     .text.ADC_MultiModeDMAConvCplt:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:98     .text.ADC_MultiModeDMAConvCplt:00000000 ADC_MultiModeDMAConvCplt
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:192    .text.HAL_ADCEx_InjectedStart:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:199    .text.HAL_ADCEx_InjectedStart:00000000 HAL_ADCEx_InjectedStart
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:420    .text.HAL_ADCEx_InjectedStart:000000e4 $d
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:428    .text.HAL_ADCEx_InjectedStart_IT:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:435    .text.HAL_ADCEx_InjectedStart_IT:00000000 HAL_ADCEx_InjectedStart_IT
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:661    .text.HAL_ADCEx_InjectedStart_IT:000000ec $d
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:669    .text.HAL_ADCEx_InjectedStop:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:676    .text.HAL_ADCEx_InjectedStop:00000000 HAL_ADCEx_InjectedStop
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:770    .text.HAL_ADCEx_InjectedPollForConversion:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:777    .text.HAL_ADCEx_InjectedPollForConversion:00000000 HAL_ADCEx_InjectedPollForConversion
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:921    .text.HAL_ADCEx_InjectedStop_IT:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:928    .text.HAL_ADCEx_InjectedStop_IT:00000000 HAL_ADCEx_InjectedStop_IT
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1026   .text.HAL_ADCEx_InjectedGetValue:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1033   .text.HAL_ADCEx_InjectedGetValue:00000000 HAL_ADCEx_InjectedGetValue
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1062   .text.HAL_ADCEx_InjectedGetValue:00000018 $d
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1066   .text.HAL_ADCEx_InjectedGetValue:0000001c $t
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1125   .text.HAL_ADCEx_MultiModeStart_DMA:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1132   .text.HAL_ADCEx_MultiModeStart_DMA:00000000 HAL_ADCEx_MultiModeStart_DMA
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1362   .text.HAL_ADCEx_MultiModeStart_DMA:00000104 $d
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1373   .text.HAL_ADCEx_MultiModeStop_DMA:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1380   .text.HAL_ADCEx_MultiModeStop_DMA:00000000 HAL_ADCEx_MultiModeStop_DMA
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1473   .text.HAL_ADCEx_MultiModeStop_DMA:00000060 $d
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1478   .text.HAL_ADCEx_MultiModeGetValue:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1485   .text.HAL_ADCEx_MultiModeGetValue:00000000 HAL_ADCEx_MultiModeGetValue
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1505   .text.HAL_ADCEx_MultiModeGetValue:00000008 $d
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1510   .text.HAL_ADCEx_InjectedConvCpltCallback:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1517   .text.HAL_ADCEx_InjectedConvCpltCallback:00000000 HAL_ADCEx_InjectedConvCpltCallback
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1532   .text.HAL_ADCEx_InjectedConfigChannel:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1539   .text.HAL_ADCEx_InjectedConfigChannel:00000000 HAL_ADCEx_InjectedConfigChannel
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1967   .text.HAL_ADCEx_InjectedConfigChannel:00000200 $d
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1974   .text.HAL_ADCEx_MultiModeConfigChannel:00000000 $t
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:1981   .text.HAL_ADCEx_MultiModeConfigChannel:00000000 HAL_ADCEx_MultiModeConfigChannel
+C:\Users\yzy\AppData\Local\Temp\ccN466ht.s:2075   .text.HAL_ADCEx_MultiModeConfigChannel:00000054 $d
 
 UNDEFINED SYMBOLS
 HAL_ADC_ErrorCallback
